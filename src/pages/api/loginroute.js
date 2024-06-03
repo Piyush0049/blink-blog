@@ -18,28 +18,23 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Check if the user exists
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ message: 'Invalid email or password' });
     }
-
-    // Compare the password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({ message: 'Invalid email or password' });
     }
 
-    // Create a JWT token
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
     
-    // Set the token in a cookie
     res.setHeader('Set-Cookie', cookie.serialize('token', token, {
       httpOnly: true,
-      maxAge: 3600, // 1 hour in seconds
+      maxAge: 3600, 
       sameSite: 'strict',
-      path: '/', // Set the cookie path to root
-      secure: process.env.NODE_ENV === 'production' // Only set the cookie in production environment
+      path: '/', 
+      secure: process.env.NODE_ENV === 'production'
     }));
 
     return res.status(200).json({ message: 'Login successful', user: { name: user.name, email: user.email, token : token } });

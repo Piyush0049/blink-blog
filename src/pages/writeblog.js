@@ -9,7 +9,7 @@ export default function WriteBlog() {
   const [file, setFile] = useState(null);
   const [token, setToken] = useState('');
   const [uploadedImage, setUploadedImage] = useState(null);
-  const [uploadType, setUploadType] = useState('image'); // Default upload type is image
+  const [uploadType, setUploadType] = useState('image');  
   const router = useRouter();
 
   useEffect(() => {

@@ -4,7 +4,6 @@ import React, { useEffect } from 'react';
 
 export default function Home() {
   useEffect(() => {
-    // Add keyframes style to the document
     const styleSheet = document.styleSheets[0];
     styleSheet.insertRule(`
       @keyframes fadeIn {
@@ -20,7 +19,6 @@ export default function Home() {
       }
     `, styleSheet.cssRules.length);
 
-    // Add event listeners to the cards
     const cards = document.querySelectorAll('[data-card]');
     cards.forEach(card => {
       card.addEventListener('mouseover', () => {
@@ -31,7 +29,6 @@ export default function Home() {
       });
     });
 
-    // Cleanup function to remove event listeners when the component unmounts
     return () => {
       cards.forEach(card => {
         card.removeEventListener('mouseover', () => {
@@ -71,8 +68,8 @@ export default function Home() {
               transition: 'transform 0.3s, box-shadow 0.3s',
               cursor: 'pointer',
               animation: 'fadeIn 1s ease-in-out, pulse 2s infinite',
-              textDecoration: 'none', // Ensure no default underline
-              display: 'inline-block', // Ensure link behaves like a block element
+              textDecoration: 'none', 
+              display: 'inline-block', 
             }}>
               Start Your Blogging Journey Now
             </p>

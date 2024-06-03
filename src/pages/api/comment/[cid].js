@@ -14,7 +14,6 @@ export default async (req, res) => {
 
 
     try {
-        // Find the blog by its ID
         const blog = await Blog.findById(blogid);
 
         if (!blog) {
@@ -27,17 +26,14 @@ export default async (req, res) => {
 
         const user = await User.findById(userid);
 
-        // Create a new comment
         const newComment = {
             text,
             author : user.name,
             createdAt: new Date()
         };
 
-        // Add the new comment to the blog's comments array
         blog.comments.push(newComment);
 
-        // Save the updated blog with the new comment
         await blog.save();
 
         res.status(200).json({ message: 'Comment added successfully', blog });

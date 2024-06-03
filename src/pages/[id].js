@@ -135,7 +135,7 @@ const blogImageStyle = {
 
 const blogvideoStyle = {
   width: '100%',
-  maxWidth: '400px', // Adjusted max width to make the video smaller
+  maxWidth: '400px', 
   height: 'auto',
   borderRadius: '10px',
   objectFit: 'cover',

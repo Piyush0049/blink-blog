@@ -48,8 +48,6 @@ const CommentSection = () => {
                 text: comment,
                 blogid: id
             });
-            // Append the new comment to the existing comments array
-            // Clear the comment input
             setComment('');
         } catch (error) {
             console.log("Error:", error);
@@ -86,7 +84,6 @@ const CommentSection = () => {
         </div>
     );
 };
-// Styles
 const commentSectionStyle = {
     marginTop: "40px",
     borderTop: "2px solid #ddd",
@@ -131,9 +128,9 @@ const commentContentStyle = {
 
 const commentInputStyle = {
     display: "flex",
-    alignItems: "flex-start", // Align items to the start (top) of the container
+    alignItems: "flex-start",
     marginTop: "20px",
-    padding: "10px 20px" // Adjusted padding for better spacing
+    padding: "10px 20px" 
 };
 
 const inputFieldStyle = {
@@ -144,7 +141,7 @@ const inputFieldStyle = {
     backgroundColor: "#f9f9f9",
     color: "#333",
     fontFamily: 'Poppins, sans-serif',
-    height: "100px" // Increased height for better visibility
+    height: "100px"
 };
 
 export default CommentSection;

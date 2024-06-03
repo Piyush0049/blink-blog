@@ -43,11 +43,11 @@ export default function Home() {
   };
 
   const articleHoverStyle = {
-    transform: 'scale(1.05)', // Scale up on hover
+    transform: 'scale(1.05)', 
   };
 
   const articleImageHoverStyle = {
-    transform: 'scale(1.1)', // Scale up on hover
+    transform: 'scale(1.1)',
   };
 
   return (
@@ -104,17 +104,17 @@ export default function Home() {
               {blogs.map((blog, index) => (
                 <div
                   key={index}
-                  style={{ ...articleStyle, ...(isHovered === index && articleHoverStyle) }} // Apply hover style when hovered
+                  style={{ ...articleStyle, ...(isHovered === index && articleHoverStyle) }} 
                   id={index}
-                  onMouseEnter={() => setIsHovered(index)} // Set hovered index on mouse enter
-                  onMouseLeave={() => setIsHovered(null)} // Clear hovered index on mouse leave
+                  onMouseEnter={() => setIsHovered(index)}
+                  onMouseLeave={() => setIsHovered(null)} 
                   onClick={() => router.push(`/${blog._id}`)}
                 >
                   {blog.media.type === "image" ? (
                     <img
                       src={blog.media.url}
                       alt={index}
-                      style={{ ...articleImageStyle, ...(isHovered === index && articleImageHoverStyle) }} // Apply hover style to image
+                      style={{ ...articleImageStyle, ...(isHovered === index && articleImageHoverStyle) }} 
                     />
                   ) : (
                     <video
@@ -139,27 +139,27 @@ export default function Home() {
 }
 
 const articleStyle = {
-  flex: '0 0 auto', // Prevent flex-grow and flex-shrink
+  flex: '0 0 auto', 
   minWidth: '250px',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   transition: 'transform 0.3s',
   cursor: 'pointer',
-  overflow: 'hidden', // Ensure content doesn't overflow
-  borderRadius: '10px', // Add border radius
-  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Add shadow for depth effect
-  position: 'relative', // Set position for overlay effect
-  zIndex: 1, // Ensure overlay stays on top
+  overflow: 'hidden',
+  borderRadius: '10px',
+  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', 
+  position: 'relative', 
+  zIndex: 1, 
 };
 
 const articleVideoStyle = {
-  width: '100%', // Make video width 100% of its container
-  maxWidth: '270px', // Ensure video does not exceed a maximum width
-  height: '200px', // Set a fixed height for the video
-  borderRadius: '10px', // Same border radius as images
-  objectFit: 'cover', // Ensure video covers the area like an image
-  transition: 'transform 0.3s', // Apply transition for hover effect
+  width: '100%',
+  maxWidth: '270px',
+  height: '200px',
+  borderRadius: '10px',
+  objectFit: 'cover',
+  transition: 'transform 0.3s', 
 };
 
 const articleImageStyle = {
@@ -167,17 +167,16 @@ const articleImageStyle = {
   borderRadius: '10px',
   height: '200px',
   objectFit: 'cover',
-  transition: 'transform 0.3s', // Apply transition to the image as well
+  transition: 'transform 0.3s',
 };
 
-// Add hover effect styles
+
 const articleHoverStyle = {
-  transform: 'scale(1.05)', // Scale up on hover
+  transform: 'scale(1.05)', 
 };
 
-// Add hover effect for image
 const articleImageHoverStyle = {
-  transform: 'scale(1.1)', // Scale up on hover
+  transform: 'scale(1.1)', 
 };
 
 const headerStyle = {
@@ -286,16 +285,15 @@ const contentStyle = {
 };
 
 const articlesContainerStyle = {
-  overflowX: 'scroll', // Enable horizontal scrolling
-  overflowY: 'hidden', // Disable vertical scrolling
+  overflowX: 'scroll', 
+  overflowY: 'hidden', 
   display: 'flex',
-  flex: 1, // Ensure this takes up the remaining space
-  height: '300px', // Set a fixed height
-  scrollbarWidth: 'thin', // For Firefox
-  scrollbarColor: '#00bfa5 #fff', // For Firefox
+  flex: 1, 
+  height: '300px', 
+  scrollbarWidth: 'thin', 
+  scrollbarColor: '#00bfa5 #fff', 
 };
 
-// Custom scrollbar for WebKit browsers (Chrome, Safari)
 const customScrollbarStyle = `
   ::-webkit-scrollbar {
     height: 8px;
@@ -314,7 +312,7 @@ const customScrollbarStyle = `
 
 const articlesStyle = {
   display: 'flex',
-  flexWrap: 'nowrap', // Prevent wrapping to make horizontal scroll work
+  flexWrap: 'nowrap', 
   gap: '20px',
   transition: 'transform 0.3s',
 };

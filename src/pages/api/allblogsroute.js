@@ -1,4 +1,4 @@
-// pages/api/getAllBlogs.js
+
 
 import connectToDatabase from '@/config/db';
 import Blog from '@/models/blogmodel';
