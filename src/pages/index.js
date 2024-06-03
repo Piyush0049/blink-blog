@@ -52,7 +52,7 @@ export default function Home() {
         <div style={styles.cardContainer}>
           <div style={styles.card} data-card>
             <h2 style={styles.cardTitle}>Write Blog Posts</h2>
-            <p style={styles.cardDescription}>Share your thoughts, stories, and experiences</p>
+            <p style={styles.cardDescription}>Share your thoughts&apos; stories&apos; and experiences</p>
           </div>
           <div style={styles.card} data-card>
             <h2 style={styles.cardTitle}>Engage with Readers</h2>
@@ -60,7 +60,7 @@ export default function Home() {
           </div>
           <div style={styles.card} data-card>
             <h2 style={styles.cardTitle}>Customize Your Blog</h2>
-            <p style={styles.cardDescription}>Personalize your blog with themes, layouts, and widgets</p>
+            <p style={styles.cardDescription}>Personalize your blog with themes&apos; layouts&apos; and widgets</p>
           </div>
           <Link href="/signup">
             <p style={{
@@ -74,7 +74,7 @@ export default function Home() {
               textDecoration: 'none', // Ensure no default underline
               display: 'inline-block', // Ensure link behaves like a block element
             }}>
-              Start Your Blogging Journey Now...
+              Start Your Blogging Journey Now
             </p>
           </Link>
         </div>

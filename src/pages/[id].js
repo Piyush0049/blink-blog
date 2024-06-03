@@ -67,7 +67,6 @@ export default function BlogPage() {
           ) : (
             <p>Loading...</p>
           )}
-          {/* Render the CommentSection component */}
         </main>
         <CommentSection />
       </div>

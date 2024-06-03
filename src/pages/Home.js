@@ -83,7 +83,7 @@ export default function Home() {
               style={heroImageStyle}
             />
             <h1 style={heroTitleStyle}>
-              Blink &amp; Blog is already nearing perfection, a boon in itself.
+              Blink &amp; Blog is already nearing perfection&apos; a boon in itself.
             </h1>
           </div>
           <div style={{ paddingLeft: "20px", minHeight: "500px" }}>
@@ -91,7 +91,7 @@ export default function Home() {
               <h1 style={{ fontSize: '30px', fontWeight: 'bold', padding: "10px 0", fontFamily: 'Poppins, sans-serif' }}>About Us</h1>
               <hr />
               <div style={sidebarListStyle}>
-                <p style={sidebarItemStyle}>At our blogging website, we pride ourselves on providing an immersive experience where users can explore a myriad of topics through captivating visuals and insightful written content. We understand the importance of security in today&apos;s digital landscape, which is why we prioritize safeguarding our users&apos; data and privacy. With robust security measures in place, you can confidently engage with our platform, knowing that your information is protected.</p>
+                <p style={sidebarItemStyle}>At our blogging website&lsquo; we pride ourselves on providing an immersive experience where users can explore a myriad of topics through captivating visuals and insightful written content&rsquo; We understand the importance of security in today&apos;s digital landscape&apos; which is why we prioritize safeguarding our users&apos; data and privacy&rsquo; With robust security measures in place&apos; you can confidently engage with our platform&apos; knowing that your information is protected&rsquo;</p>
               </div>
             </aside>
           </div>
