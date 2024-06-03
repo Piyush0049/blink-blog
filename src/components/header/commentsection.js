@@ -4,12 +4,18 @@ import axios from "axios";
 import router from "next/router";
 
 const CommentSection = () => {
-    const { id } = router.query;
     const [token, settoken] = useState("");
     useEffect(() => {
         const tokenvalue = localStorage.getItem("token");
         settoken(tokenvalue)
     }, []);
+
+    const [id, setid] = useState("");
+
+    useEffect(() => {
+        const { id } = router.query;
+        setid(id);
+    }, [id]);
 
     const [allcomments, setallcomments] = useState([]);
     const [comment, setComment] = useState('');
@@ -54,7 +60,7 @@ const CommentSection = () => {
         }
     };
 
-    
+
     return (
         <div style={commentSectionStyle}>
             <h2 style={commentSectionTitleStyle}>Comments</h2>
@@ -130,7 +136,7 @@ const commentInputStyle = {
     display: "flex",
     alignItems: "flex-start",
     marginTop: "20px",
-    padding: "10px 20px" 
+    padding: "10px 20px"
 };
 
 const inputFieldStyle = {

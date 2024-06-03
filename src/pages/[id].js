@@ -8,10 +8,14 @@ import CommentSection from "@/components/header/commentsection"; // Ensure the p
 
 export default function BlogPage() {
   const router = useRouter();
-  const { id } = router.query;
+  const [id, setid] = useState("");
   const [blog, setBlog] = useState(null);
   const [user, setUser] = useState(null);
 
+  useEffect(() => {
+    const {id} = router.query;
+    setid(id);
+  }, [id]);
   useEffect(() => {
     if (id) {
       fetchBlog(id);
