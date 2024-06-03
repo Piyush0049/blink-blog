@@ -61,7 +61,6 @@ const CommentSection = () => {
         <div style={commentSectionStyle}>
             <h2 style={commentSectionTitleStyle}>Comments</h2>
             <div style={commentListStyle}>
-                // Map over allcomments and render each comment
                 {allcomments.map((comment, index) => (
                     <div key={index} style={commentStyle}>
                         <p style={commentAuthorStyle}>{comment.author}</p>
@@ -71,7 +70,6 @@ const CommentSection = () => {
                 ))}
 
             </div>
-            {/* Add your comment input field here */}
             <div style={commentInputStyle}>
                 <input
                     type="text"
