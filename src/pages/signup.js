@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import TextField from '@mui/material/TextField';
@@ -17,6 +17,24 @@ export default function Signuppage() {
         password: "",
         cpassword: ""
     });
+
+    const [windowWidth, setWindowWidth] = useState("");
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    // Set initial width
+    handleResize();
+
+    // Add event listener
+    window.addEventListener("resize", handleResize);
+
+    // Clean up event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
     const [showPassword, setShowPassword] = useState(false);
     const [showcPassword, setShowcPassword] = useState(false);
@@ -59,7 +77,7 @@ export default function Signuppage() {
             animation: "backgroundFade 10s infinite"
         }}>
             <h1 style={{
-                fontSize: "48px",
+                fontSize: windowWidth > 477 ?"48px" : "35px",
                 color: "white",
                 textShadow: "2px 2px 8px rgba(0, 0, 0, 0.3)",
                 animation: "fadeIn 2s"
@@ -81,7 +99,7 @@ export default function Signuppage() {
                 background: "rgba(255, 255, 255, 0.8)",
                 boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
                 animation: "slideIn 1s ease-out",
-                width: "450px"
+                width: windowWidth > 465 ? "450px" : "350px"
             }}>
                 <TextField
                     label="Username"

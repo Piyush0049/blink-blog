@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import TextField from '@mui/material/TextField';
@@ -17,6 +17,23 @@ export default function LoginPage() {
     });
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState("");
+    const [windowWidth, setWindowWidth] = useState("");
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    // Set initial width
+    handleResize();
+
+    // Add event listener
+    window.addEventListener("resize", handleResize);
+
+    // Clean up event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
     const login = async (e) => {
         e.preventDefault();
@@ -48,14 +65,14 @@ export default function LoginPage() {
             background: "linear-gradient(135deg, #4E90FC 0%, #8DB8FE 100%)",
         }}>
             <h1 style={{
-                fontSize: "48px",
+                fontSize: windowWidth > 611 ? "48px" : 30,
                 color: "white",
                 textShadow: "2px 2px 8px rgba(0, 0, 0, 0.3)",
                 animation: "fadeIn 2s"
             }}><b>Welcome To Blink & Blog...</b></h1>
             <h3 style={{
                 padding: "20px",
-                fontSize: "36px",
+                fontSize: windowWidth > 611 ? "30px" : 25 ,
                 color: "white",
                 textShadow: "2px 2px 8px rgba(0, 0, 0, 0.3)",
                 animation: "fadeIn 3s"
@@ -71,7 +88,7 @@ export default function LoginPage() {
                 boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
                 animation: "slideIn 1s ease-out",
                 opacity: "0.9",
-                width: "420px"
+                width: windowWidth > 460 ? "420px" : 330 ,
             }}>
                 <TextField
                     label="Email"

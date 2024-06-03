@@ -12,8 +12,27 @@ export default function BlogPage() {
   const [blog, setBlog] = useState(null);
   const [user, setUser] = useState(null);
 
+  const [windowWidth, setWindowWidth] = useState("");
   useEffect(() => {
-    const {id} = router.query;
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    // Set initial width
+    handleResize();
+
+    // Add event listener
+    window.addEventListener("resize", handleResize);
+
+    // Clean up event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+
+  useEffect(() => {
+    const { id } = router.query;
     setid(id);
   }, [id]);
   useEffect(() => {
@@ -38,8 +57,8 @@ export default function BlogPage() {
   };
 
   return (
-    <div style={{ maxWidth: '100%', background: "#f8f9fa", minHeight: "100vh", padding: "20px", background: "linear-gradient(135deg, #99FCED 0%, #DBFF7B 100%)", }}>
-      <div style={{ fontFamily: 'Poppins, sans-serif', maxWidth: '1300px', margin: '0 auto', padding: "30px", borderRadius: "20px", boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)", background: "#f8f9fa" }}>
+    <div style={{ maxWidth: '100%', background: "#f8f9fa", minHeight: "100vh", padding:  windowWidth > 460 ? "20px 20px" : "30px 0", background: "linear-gradient(135deg, #99FCED 0%, #DBFF7B 100%)", }}>
+      <div style={{ fontFamily: 'Poppins, sans-serif', maxWidth: '1300px', margin: '0 auto', padding: windowWidth > 570 ?'30px' : "13px", borderRadius: "20px", boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)", background: "#f8f9fa" }}>
         <Head>
           <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
           <title>Blink & Blog - Blog</title>
@@ -51,15 +70,26 @@ export default function BlogPage() {
             </Link>
           </div>
           <nav style={navStyle}>
-            <Link href="/Home" style={linkStyle}><b>Explore More</b></Link>
-            <Link href="/Home" style={linkStyle}><b>About</b></Link>
+
+            <Link href="/Home" style={{
+              ...linkStyle,
+              fontSize: windowWidth > 460 ?'16px' : "13px",
+            }}><b>Explore More</b></Link>
+            {windowWidth > 460 && (
+              <Link href="/Home" style={linkStyle}><b>About</b></Link>
+            )}
+
           </nav>
         </header>
-        <main style={mainStyle}>
+        <main style={{ ...mainStyle, minHeight: "1000px", width: "auto" }}>
           {blog ? (
-            <div style={blogContainerStyle}>
-              <h1 style={blogTitleStyle}>{blog.title}</h1>
-              <p style={blognameStyle}> - {user.name}</p>
+            <div style={{...blogContainerStyle, 
+              padding: windowWidth > 430 ?'20px' : "5px",}}>
+              <h1 style={{
+                ...blogTitleStyle,
+                fontSize: windowWidth > 850 ? '30px' : "20px",
+              }}>{blog.title}</h1>
+              <p style={{ ...blognameStyle, fontSize: windowWidth > 850 ? '20px' : "15px", }}> - {user.name}</p>
               {blog.media.type === "image" ? (
                 <img src={blog.media.url} alt={blog.title} style={blogImageStyle} />
               ) : (
@@ -96,7 +126,6 @@ const navStyle = {
 };
 
 const linkStyle = {
-  fontSize: '16px',
   textDecoration: 'none',
   cursor: 'pointer',
   color: "#03BDA1",
@@ -111,11 +140,9 @@ const mainStyle = {
 
 const blogContainerStyle = {
   maxWidth: '800px',
-  padding: '20px',
 };
 
 const blogTitleStyle = {
-  fontSize: '30px',
   fontWeight: 'bold',
   marginBottom: '20px',
   fontFamily: 'Poppins, sans-serif',
@@ -123,7 +150,6 @@ const blogTitleStyle = {
 };
 
 const blognameStyle = {
-  fontSize: '20px',
   fontWeight: 'bold',
   marginBottom: '20px',
   fontFamily: 'Poppins, sans-serif',

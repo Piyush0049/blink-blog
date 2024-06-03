@@ -4,10 +4,28 @@ import axios from "axios";
 import router from "next/router";
 
 const CommentSection = () => {
+    const [windowWidth, setWindowWidth] = useState("");
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+
+        // Set initial width
+        handleResize();
+
+        // Add event listener
+        window.addEventListener("resize", handleResize);
+
+        // Clean up event listener on component unmount
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
+
     const [token, settoken] = useState("");
     useEffect(() => {
         const tokenvalue = localStorage.getItem("token");
-        settoken(tokenvalue)
+        settoken(tokenvalue);
     }, []);
 
     const [id, setid] = useState("");
@@ -24,7 +42,6 @@ const CommentSection = () => {
         setComment(e.target.value);
     };
 
-
     useEffect(() => {
         if (id) {
             fetchBlog(id);
@@ -35,8 +52,8 @@ const CommentSection = () => {
         try {
             const res = await axios.get(`/api/${id}`);
             if (res.status === 200) {
-                console.log(res)
-                setallcomments(res.data.blogdet.comments)
+                console.log(res);
+                setallcomments(res.data.blogdet.comments || []);
             } else {
                 console.log("Error fetching blog");
             }
@@ -44,7 +61,6 @@ const CommentSection = () => {
             console.log("Error fetching blog:", error);
         }
     };
-
 
     const handleSendClick = async (e) => {
         e.preventDefault();
@@ -55,24 +71,36 @@ const CommentSection = () => {
                 blogid: id
             });
             setComment('');
+            fetchBlog(id); // Refresh comments after posting
         } catch (error) {
             console.log("Error:", error);
         }
     };
 
-
     return (
         <div style={commentSectionStyle}>
-            <h2 style={commentSectionTitleStyle}>Comments</h2>
+            <h2 style={{ ...commentSectionTitleStyle, fontSize: windowWidth > 490 ? null : "17px" }}>Comments</h2>
             <div style={commentListStyle}>
-                {allcomments.map((comment, index) => (
-                    <div key={index} style={commentStyle}>
-                        <p style={commentAuthorStyle}>{comment.author}</p>
-                        <p style={commentContentStyle}>{comment.createdAt.substring(0, 10)}</p>
-                        <p style={commentContentStyle}>{comment.text}</p>
-                    </div>
-                ))}
-
+                {allcomments.length === 0 ? (
+                    <h3 style={{...noCommentsStyle, fontSize : windowWidth > 480 ? null : "14px"}}>No comments yet. Be the first to comment!</h3>
+                ) : (
+                    allcomments.map((comment, index) => (
+                        <div key={index} style={commentStyle}>
+                            <p style={{
+                                ...commentAuthorStyle,
+                                fontSize: windowWidth > 480 ? "18px" : "14px",
+                            }}>{comment.author}</p>
+                            <p style={{
+                                ...commentContentStyle,
+                                fontSize: windowWidth > 480 ? "16px" : "12px",
+                            }}>{comment.createdAt.substring(0, 10)}</p>
+                            <p style={{
+                                ...commentContentStyle,
+                                fontSize: windowWidth > 480 ? "16px" : "12px",
+                            }}>{comment.text}</p>
+                        </div>
+                    ))
+                )}
             </div>
             <div style={commentInputStyle}>
                 <input
@@ -90,6 +118,7 @@ const CommentSection = () => {
         </div>
     );
 };
+
 const commentSectionStyle = {
     marginTop: "40px",
     borderTop: "2px solid #ddd",
@@ -110,6 +139,7 @@ const commentSectionTitleStyle = {
 
 const commentListStyle = {
     marginBottom: "20px",
+    padding: "8px"
 };
 
 const commentStyle = {
@@ -121,14 +151,12 @@ const commentStyle = {
 };
 
 const commentAuthorStyle = {
-    fontSize: "18px",
     fontWeight: "bold",
     color: "#333",
     marginBottom: "5px",
 };
 
 const commentContentStyle = {
-    fontSize: "16px",
     color: "#666",
 };
 
@@ -148,6 +176,12 @@ const inputFieldStyle = {
     color: "#333",
     fontFamily: 'Poppins, sans-serif',
     height: "100px"
+};
+
+const noCommentsStyle = {
+    textAlign: 'center',
+    color: '#666',
+    marginTop: '20px',
 };
 
 export default CommentSection;

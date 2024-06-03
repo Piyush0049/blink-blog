@@ -3,13 +3,29 @@ import axios from "axios";
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Opacity } from "@mui/icons-material";
 
 export default function Home() {
   const router = useRouter();
   const [blogs, setBlogs] = useState([]);
   const [isHovered, setIsHovered] = useState(false);
   const articlesRef = useRef(null);
+  const [windowWidth, setWindowWidth] = useState("");
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    // Set initial width
+    handleResize();
+
+    // Add event listener
+    window.addEventListener("resize", handleResize);
+
+    // Clean up event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     fetchBlogs();
@@ -43,7 +59,7 @@ export default function Home() {
   };
 
   const articleHoverStyle = {
-    transform: 'scale(1.05)', 
+    transform: 'scale(1.05)',
   };
 
   const articleImageHoverStyle = {
@@ -52,7 +68,7 @@ export default function Home() {
 
   return (
     <div style={{ maxWidth: '100%', background: "linear-gradient(135deg, #C3FCF5 0%, #8DFDF0 100%)", minHeight: "100vh", padding: "20px" }}>
-      <div style={{ fontFamily: 'Poppins, sans-serif', maxWidth: '1300px', margin: '0 auto', background: "#f8f9fa", padding: "30px", borderRadius: "20px", boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)" }}>
+      <div style={{ fontFamily: 'Poppins, sans-serif', maxWidth: '1300px', margin: '0 auto', background: "#f8f9fa", padding: windowWidth > 470 ? "30px" : "10px", borderRadius: "20px", boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)" }}>
         <Head>
           <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
           <title>Blink &amp; Blog</title>
@@ -61,12 +77,14 @@ export default function Home() {
           <div style={logoStyle}>
             <img alt="logo" src="https://res.cloudinary.com/da2imhgtf/image/upload/v1717414763/svdurdbamvz2qri1ychm.png" style={{ height: '50px' }} />
           </div>
+          {windowWidth > 675 && (
+            <nav style={navStyle}>
+              <Link href="#exploreSection" passHref style={linkStyle}><b>Explore</b></Link>
+              <Link href="/Home" style={linkStyle}><b>My Blogs</b></Link>
+              <Link href="/Home" style={linkStyle}><b>About</b></Link>
+            </nav>
+          )}
 
-          <nav style={navStyle}>
-            <Link href="#exploreSection" passHref style={linkStyle}><b>Explore</b></Link>
-            <Link href="/Home" style={linkStyle}><b>My Blogs</b></Link>
-            <Link href="/Home" style={linkStyle}><b>About</b></Link>
-          </nav>
           <button
             style={startWritingButtonStyle}
             onClick={() => { router.push("/writeblog") }}
@@ -75,46 +93,58 @@ export default function Home() {
           </button>
         </header>
 
-        <main style={mainStyle} id="exploreSection">
+        <main style={{
+          display: windowWidth > 1220 ? 'flex' : null,
+          paddingTop: '20px',
+          paddingLeft: "5px",
+          paddingRight: "5px",
+        }} id="exploreSection">
           <div style={heroStyle}>
             <img
               src="https://res.cloudinary.com/da2imhgtf/image/upload/v1717421094/hbee6ankimbppxkoojl4.jpg"
               alt="Hero Image"
               style={heroImageStyle}
             />
-            <h1 style={heroTitleStyle}>
-              Blink &amp; Blog is already nearing perfection&apos; a boon in itself.
-            </h1>
+            {windowWidth > 1315 && (
+              <h1 style={heroTitleStyle}>
+                Blink &amp; Blog is already nearing perfection&apos; a boon in itself.
+              </h1>
+            )}
+
           </div>
-          <div style={{ paddingLeft: "20px", minHeight: "500px" }}>
-            <aside style={asideStyle}>
-              <h1 style={{ fontSize: '30px', fontWeight: 'bold', padding: "10px 0", fontFamily: 'Poppins, sans-serif' }}>About Us</h1>
+          <div style={{ paddingLeft: windowWidth > 900 ? "20px" : null, minHeight: "auto" }}>
+            <aside style={{ ...asideStyle, padding: windowWidth > 580 ? '30px 20px' : "20px 15px", }}>
+              <h1 style={{ fontSize: windowWidth > 580 ? "30px" : "23px", fontWeight: 'bold', padding: windowWidth > 580 ? '10px 0' : "0 0", fontFamily: 'Poppins, sans-serif' }}>About Us</h1>
               <hr />
               <div style={sidebarListStyle}>
-                <p style={sidebarItemStyle}>At our blogging website&lsquo; we pride ourselves on providing an immersive experience where users can explore a myriad of topics through captivating visuals and insightful written content&rsquo; We understand the importance of security in today&apos;s digital landscape&apos; which is why we prioritize safeguarding our users&apos; data and privacy&rsquo; With robust security measures in place&apos; you can confidently engage with our platform&apos; knowing that your information is protected&rsquo;</p>
+                <p style={{ ...sidebarItemStyle, padding: windowWidth > 580 ? '10px 0' : "0 0", fontSize: windowWidth > 580 ? "16px" : "13px", }}>At our blogging website&lsquo; we pride ourselves on providing an immersive experience where users can explore a myriad of topics through captivating visuals and insightful written content&rsquo; We understand the importance of security in today&apos;s digital landscape&apos; which is why we prioritize safeguarding our users&apos; data and privacy&rsquo; With robust security measures in place&apos; you can confidently engage with our platform&apos; knowing that your information is protected&rsquo;</p>
               </div>
             </aside>
           </div>
         </main>
-        <h1 style={{ color: "#03BDA1", fontFamily: 'Poppins, sans-serif', padding: "30px 40px" }}>Explore Our Blogs:</h1>
-        <div style={contentStyle}>
-          <button onClick={scrollLeft} style={scrollButtonStyle}>◀</button>
+        <h1 style={{ color: "#03BDA1", fontFamily: 'Poppins, sans-serif', padding: "30px 40px", fontSize: windowWidth > 490 ? null : "21px" }}>Explore Our Blogs:</h1>
+        <div style={{...contentStyle, gap: windowWidth >520 ? '20px' : null}}>
+          <button onClick={scrollLeft} style={{
+            ...scrollButtonStyle,
+            fontSize: windowWidth > 510 ? "16px" : "10px",
+            padding: windowWidth > 510 ? '10px 20px' : '5px 10px',
+          }}>◀</button>
           <div style={articlesContainerStyle} ref={articlesRef}>
             <div style={articlesStyle}>
               {blogs.map((blog, index) => (
                 <div
                   key={index}
-                  style={{ ...articleStyle, ...(isHovered === index && articleHoverStyle) }} 
+                  style={{ ...articleStyle, ...(isHovered === index && articleHoverStyle) }}
                   id={index}
                   onMouseEnter={() => setIsHovered(index)}
-                  onMouseLeave={() => setIsHovered(null)} 
+                  onMouseLeave={() => setIsHovered(null)}
                   onClick={() => router.push(`/${blog._id}`)}
                 >
                   {blog.media.type === "image" ? (
                     <img
                       src={blog.media.url}
                       alt={index}
-                      style={{ ...articleImageStyle, ...(isHovered === index && articleImageHoverStyle) }} 
+                      style={{ ...articleImageStyle, ...(isHovered === index && articleImageHoverStyle) }}
                     />
                   ) : (
                     <video
@@ -130,16 +160,20 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <button onClick={scrollRight} style={scrollButtonStyle}>▶</button>
+          <button onClick={scrollRight} style={{
+            ...scrollButtonStyle,
+            fontSize: windowWidth > 510 ? "16px" : "10px",
+            padding: windowWidth > 510 ? '10px 20px' : '5px 10px'
+          }}>▶</button>
         </div>
       </div>
       <style>{customScrollbarStyle}</style>
-    </div>
+    </div >
   );
 }
 
 const articleStyle = {
-  flex: '0 0 auto', 
+  flex: '0 0 auto',
   minWidth: '250px',
   display: 'flex',
   flexDirection: 'column',
@@ -148,9 +182,9 @@ const articleStyle = {
   cursor: 'pointer',
   overflow: 'hidden',
   borderRadius: '10px',
-  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', 
-  position: 'relative', 
-  zIndex: 1, 
+  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+  position: 'relative',
+  zIndex: 1,
 };
 
 const articleVideoStyle = {
@@ -159,7 +193,7 @@ const articleVideoStyle = {
   height: '200px',
   borderRadius: '10px',
   objectFit: 'cover',
-  transition: 'transform 0.3s', 
+  transition: 'transform 0.3s',
 };
 
 const articleImageStyle = {
@@ -172,11 +206,11 @@ const articleImageStyle = {
 
 
 const articleHoverStyle = {
-  transform: 'scale(1.05)', 
+  transform: 'scale(1.05)',
 };
 
 const articleImageHoverStyle = {
-  transform: 'scale(1.1)', 
+  transform: 'scale(1.1)',
 };
 
 const headerStyle = {
@@ -215,12 +249,6 @@ const startWritingButtonStyle = {
   fontFamily: 'Poppins, sans-serif'
 };
 
-const mainStyle = {
-  display: 'flex',
-  paddingTop: '20px',
-  paddingLeft: "5px",
-  paddingRight: "5px",
-};
 
 const heroStyle = {
   position: 'relative',
@@ -251,7 +279,6 @@ const heroTitleStyle = {
 
 const asideStyle = {
   flex: 1,
-  padding: '30px 20px',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
@@ -270,28 +297,25 @@ const sidebarListStyle = {
 };
 
 const sidebarItemStyle = {
-  padding: '10px 0',
-  fontSize: "16px",
   whiteSpace: "wrap",
   maxWidth: "350px",
   fontFamily: 'Poppins, sans-serif'
 };
 
 const contentStyle = {
-  paddingTop: '20px',
   display: 'flex',
   alignItems: 'center', // Center the buttons vertically
-  gap: '20px'
+  
 };
 
 const articlesContainerStyle = {
-  overflowX: 'scroll', 
-  overflowY: 'hidden', 
+  overflowX: 'scroll',
+  overflowY: 'hidden',
   display: 'flex',
-  flex: 1, 
-  height: '300px', 
-  scrollbarWidth: 'thin', 
-  scrollbarColor: '#00bfa5 #fff', 
+  flex: 1,
+  height: '300px',
+  scrollbarWidth: 'thin',
+  scrollbarColor: '#00bfa5 #fff',
 };
 
 const customScrollbarStyle = `
@@ -312,7 +336,7 @@ const customScrollbarStyle = `
 
 const articlesStyle = {
   display: 'flex',
-  flexWrap: 'nowrap', 
+  flexWrap: 'nowrap',
   gap: '20px',
   transition: 'transform 0.3s',
 };
@@ -321,9 +345,7 @@ const scrollButtonStyle = {
   background: '#00bfa5',
   color: '#fff',
   border: 'none',
-  padding: '10px 20px',
   borderRadius: '5px',
   cursor: 'pointer',
   transition: 'background 0.3s, transform 0.3s',
-  fontSize: "16px",
 };
