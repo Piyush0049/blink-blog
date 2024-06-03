@@ -55,7 +55,7 @@ export default function Home() {
       <div style={{ fontFamily: 'Poppins, sans-serif', maxWidth: '1300px', margin: '0 auto', background: "#f8f9fa", padding: "30px", borderRadius: "20px", boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)" }}>
         <Head>
           <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-          <title>Blink & Blog</title>
+          <title>Blink &amp; Blog</title>
         </Head>
         <header style={headerStyle}>
           <div style={logoStyle}>
@@ -83,7 +83,7 @@ export default function Home() {
               style={heroImageStyle}
             />
             <h1 style={heroTitleStyle}>
-              Blink & Blog is already nearing perfection, a boon in itself.
+              Blink &amp; Blog is already nearing perfection, a boon in itself.
             </h1>
           </div>
           <div style={{ paddingLeft: "20px", minHeight: "500px" }}>
@@ -91,7 +91,7 @@ export default function Home() {
               <h1 style={{ fontSize: '30px', fontWeight: 'bold', padding: "10px 0", fontFamily: 'Poppins, sans-serif' }}>About Us</h1>
               <hr />
               <div style={sidebarListStyle}>
-                <p style={sidebarItemStyle}>At our blogging website, we pride ourselves on providing an immersive experience where users can explore a myriad of topics through captivating visuals and insightful written content. We understand the importance of security in today's digital landscape, which is why we prioritize safeguarding our users' data and privacy. With robust security measures in place, you can confidently engage with our platform, knowing that your information is protected.</p>
+                <p style={sidebarItemStyle}>At our blogging website, we pride ourselves on providing an immersive experience where users can explore a myriad of topics through captivating visuals and insightful written content. We understand the importance of security in today&apos;s digital landscape, which is why we prioritize safeguarding our users&apos; data and privacy. With robust security measures in place, you can confidently engage with our platform, knowing that your information is protected.</p>
               </div>
             </aside>
           </div>
@@ -119,12 +119,11 @@ export default function Home() {
                   ) : (
                     <video
                       controls
-                      style={{ ...articlevideoStyle, ...(isHovered === index && articleImageHoverStyle) }}
+                      style={{ ...articleVideoStyle, ...(isHovered === index && articleImageHoverStyle) }}
                     >
                       <source src={blog.media.url} type="video/mp4" />
                     </video>
                   )}
-
 
                   <h2 style={{ marginTop: "20px", fontSize: "18px", color: "#606D6B", marginBottom: "10px" }}>{blog.title}</h2>
                 </div>
@@ -154,10 +153,7 @@ const articleStyle = {
   zIndex: 1, // Ensure overlay stays on top
 };
 
-
-
-
-const articlevideoStyle = {
+const articleVideoStyle = {
   width: '100%', // Make video width 100% of its container
   maxWidth: '270px', // Ensure video does not exceed a maximum width
   height: '200px', // Set a fixed height for the video
@@ -165,7 +161,6 @@ const articlevideoStyle = {
   objectFit: 'cover', // Ensure video covers the area like an image
   transition: 'transform 0.3s', // Apply transition for hover effect
 };
-
 
 const articleImageStyle = {
   width: '100%',
