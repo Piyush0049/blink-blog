@@ -4,7 +4,7 @@ import axios from "axios";
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import CommentSection from "@/components/header/commentsection";
+import CommentSection from "@/components/header/commentsection"; // Ensure the path is correct
 
 export default function BlogPage() {
   const router = useRouter();
@@ -22,11 +22,11 @@ export default function BlogPage() {
     try {
       const res = await axios.get(`/api/${id}`);
       if (res.status === 200) {
-        console.log(res);
+        console.log('API response:', res);
         setBlog(res.data.blogdet);
         setUser(res.data.userdet);
       } else {
-        console.log("Error fetching blog");
+        console.log("Error fetching blog, status:", res.status);
       }
     } catch (error) {
       console.log("Error fetching blog:", error);
@@ -136,7 +136,7 @@ const blogImageStyle = {
 
 const blogvideoStyle = {
   width: '100%',
-  maxWidth: '400px', 
+  maxWidth: '400px', // Adjusted max width to make the video smaller
   height: 'auto',
   borderRadius: '10px',
   objectFit: 'cover',
