@@ -61,12 +61,10 @@ const CommentSection = () => {
         <div style={commentSectionStyle}>
             <h2 style={commentSectionTitleStyle}>Comments</h2>
             <div style={commentListStyle}>
-                {/* Map over allcomments and render each comment */}
                 // Map over allcomments and render each comment
                 {allcomments.map((comment, index) => (
                     <div key={index} style={commentStyle}>
                         <p style={commentAuthorStyle}>{comment.author}</p>
-                        {/* Display a substring of the createdAt date */}
                         <p style={commentContentStyle}>{comment.createdAt.substring(0, 10)}</p>
                         <p style={commentContentStyle}>{comment.text}</p>
                     </div>
