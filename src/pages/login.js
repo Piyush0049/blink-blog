@@ -65,14 +65,14 @@ export default function LoginPage() {
             background: "linear-gradient(135deg, #4E90FC 0%, #8DB8FE 100%)",
         }}>
             <h1 style={{
-                fontSize: windowWidth > 611 ? "48px" : 30,
+                fontSize: windowWidth > 611 ? "48px" : 23,
                 color: "white",
                 textShadow: "2px 2px 8px rgba(0, 0, 0, 0.3)",
                 animation: "fadeIn 2s"
             }}><b>Welcome To Blink & Blog...</b></h1>
             <h3 style={{
                 padding: "20px",
-                fontSize: windowWidth > 611 ? "30px" : 25 ,
+                fontSize: windowWidth > 611 ? "30px" : 21 ,
                 color: "white",
                 textShadow: "2px 2px 8px rgba(0, 0, 0, 0.3)",
                 animation: "fadeIn 3s"
@@ -150,7 +150,7 @@ export default function LoginPage() {
                 marginTop: "20px",
                 color: "white",
                 animation: "fadeIn 4s",
-                fontSize: "19px"
+                fontSize: windowWidth > 611 ? "19px" : 15 ,
             }}>
                 Do not have an account?<Link href="/signup" style={{
                     color: "yellow",

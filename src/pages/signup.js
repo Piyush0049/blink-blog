@@ -41,6 +41,7 @@ export default function Signuppage() {
 
     const signup = async (e) => {
         e.preventDefault();
+        console.log(user)
         if (user.password !== user.cpassword) {
             window.alert("Please fill your passwords correctly");
             return;
@@ -77,14 +78,14 @@ export default function Signuppage() {
             animation: "backgroundFade 10s infinite"
         }}>
             <h1 style={{
-                fontSize: windowWidth > 477 ?"48px" : "35px",
+                fontSize: windowWidth > 477 ?"48px" : "28px",
                 color: "white",
                 textShadow: "2px 2px 8px rgba(0, 0, 0, 0.3)",
                 animation: "fadeIn 2s"
             }}><b>Just One Step Away...</b></h1>
             <h1 style={{
                 padding: "20px",
-                fontSize: "26px",
+                fontSize: windowWidth > 611 ? "26px" : 18 ,
                 color: "white",
                 textShadow: "2px 2px 8px rgba(0, 0, 0, 0.3)",
                 animation: "fadeIn 3s"
@@ -102,7 +103,7 @@ export default function Signuppage() {
                 width: windowWidth > 465 ? "450px" : "350px"
             }}>
                 <TextField
-                    label="Username"
+                    label="name"
                     variant="outlined"
                     value={user.name}
                     onChange={(e) => setUser({ ...user, name: e.target.value })}
@@ -175,7 +176,7 @@ export default function Signuppage() {
                 marginTop: "20px",
                 color: "white",
                 animation: "fadeIn 4s",
-                fontSize: "19px"
+                fontSize: windowWidth > 611 ? "19px" : 15 ,
             }}>
                 Already have an account?<Link href="/login" style={{
                     color: "#FFFC69",

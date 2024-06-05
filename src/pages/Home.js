@@ -67,8 +67,8 @@ export default function Home() {
   };
 
   return (
-    <div style={{ maxWidth: '100%', background: "linear-gradient(135deg, #C3FCF5 0%, #8DFDF0 100%)", minHeight: "100vh", padding: "20px" }}>
-      <div style={{ fontFamily: 'Poppins, sans-serif', maxWidth: '1300px', margin: '0 auto', background: "#f8f9fa", padding: windowWidth > 470 ? "30px" : "10px", borderRadius: "20px", boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)" }}>
+    <div style={{ maxWidth: '100%', background: "linear-gradient(135deg, #C3FCF5 0%, #8DFDF0 100%)", minHeight: "100%", padding: "20px", height : "auto" }}>
+      <div style={{ fontFamily: 'Poppins, sans-serif', maxWidth: '1300px', margin: '0 auto', background: "#f8f9fa", padding: windowWidth > 470 ? "30px 30px" : "10px 30px",  borderRadius: "20px", boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)" }}>
         <Head>
           <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
           <title>Blink &amp; Blog</title>
