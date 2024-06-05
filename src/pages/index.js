@@ -1,8 +1,26 @@
 "use client";
+import { Height } from '@mui/icons-material';
 import Link from 'next/link';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 export default function Home() {
+  const [windowWidth, setWindowWidth] = useState("");
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    // Set initial width
+    handleResize();
+
+    // Add event listener
+    window.addEventListener("resize", handleResize);
+
+    // Clean up event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   useEffect(() => {
     const styleSheet = document.styleSheets[0];
     styleSheet.insertRule(`
@@ -85,7 +103,8 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '100vh',
+    minHeight: '100vh',
+    height : "auto",
     fontFamily: 'Arial, sans-serif',
     overflow: 'hidden',
     backgroundImage: 'url(https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/06/How_To_Start_A_Blog_-_article_image.jpg)',
@@ -103,7 +122,6 @@ const styles = {
     opacity : "0.76"
   },
   title: {
-    fontSize: '3em',
     color: '#333',
     marginBottom: '0.5em',
     animation: 'fadeIn 1s ease-in-out',
