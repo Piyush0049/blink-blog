@@ -28,7 +28,7 @@ export default function WriteBlog() {
   };
 
   const handleSubmit = async () => {
-    if(window.alert("Do you want to publish your blog?")){
+    if(window.confirm("Do you want to publish your blog?")){
     try {
       const res = await axios.post('/api/writeblogroute', {
         title: title,
