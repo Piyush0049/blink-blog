@@ -118,7 +118,7 @@ export default function Signuppage() {
       fontSize: windowWidth > 611 ? "1rem" : "0.875rem",
     },
     link: {
-      color: "#7ed8ff",
+      color: "#53cbff",
       marginLeft: "0.3rem",
     },
   };
