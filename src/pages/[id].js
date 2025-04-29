@@ -57,7 +57,7 @@ export default function BlogPage() {
   };
 
   return (
-    <div style={{ maxWidth: '100%', background: "#f8f9fa", minHeight: "100vh", padding:  windowWidth > 460 ? "20px 20px" : "30px 0", background: "linear-gradient(135deg, #99FCED 0%, #DBFF7B 100%)", }}>
+    <div style={{ maxWidth: '100%', background: "#f8f9fa", minHeight: "100vh", padding:  windowWidth > 460 ? "20px 20px" : "5px 0", background: "linear-gradient(135deg, #99FCED 0%, #DBFF7B 100%)", }}>
       <div style={{ fontFamily: 'Poppins, sans-serif', maxWidth: '1300px', margin: '0 auto', padding: windowWidth > 570 ?'30px' : "13px", borderRadius: "20px", boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)", background: "#f8f9fa" }}>
         <Head>
           <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -100,7 +100,7 @@ export default function BlogPage() {
               <p style={blogTextStyle}>{blog.blogText}</p>
             </div>
           ) : (
-            <p style={{color : "#53ffe2"}}>Loading...</p>
+            <p style={{color : "#00c0a0"}}>Loading...</p>
           )}
         </main>
         <CommentSection />
