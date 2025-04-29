@@ -100,7 +100,7 @@ export default function BlogPage() {
               <p style={blogTextStyle}>{blog.blogText}</p>
             </div>
           ) : (
-            <p>Loading...</p>
+            <p style={{color : "#53ffe2"}}>Loading...</p>
           )}
         </main>
         <CommentSection />
