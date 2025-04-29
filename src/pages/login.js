@@ -64,9 +64,8 @@ export default function LoginPage() {
     header: {
       color: "#d0fdfa",
       textShadow: "2px 2px 8px rgba(0,0,0,0.3)",
-      marginBottom: "0.5rem",
-      fontSize: windowWidth > 477 ? "2.5rem" : "1.8rem",
-      marginBottom: windowWidth > 477 ? "2.5rem" : "0",
+      fontSize: windowWidth > 477 ? "2.3rem" : "1.8rem",
+      marginBottom: windowWidth > 477 ? "0.8rem" : "0",
       textAlign: "center",
     },
     card: {
@@ -98,7 +97,7 @@ export default function LoginPage() {
       fontSize: "1.2rem",
       borderRadius: "5px",
       border: "none",
-      backgroundColor: "#4CAF50",
+      backgroundColor: "#1bb599",
       color: "white",
       cursor: "pointer",
       transition: "background-color 0.3s",
@@ -115,9 +114,8 @@ export default function LoginPage() {
       fontSize: windowWidth > 611 ? "1rem" : "0.875rem",
     },
     link: {
-      color: "#FFEB3B",
-      textDecoration: "underline",
-      marginLeft: "0.5rem",
+      color: "#53cbff",
+      marginLeft: "0.3rem",
     },
   };
 
@@ -169,7 +167,7 @@ export default function LoginPage() {
       <p style={styles.footerText}>
         Don’t have an account?
         <Link href="/signup" style={styles.link}>
-          Signup Now!
+          Sign up
         </Link>
       </p>
 

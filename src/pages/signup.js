@@ -92,8 +92,9 @@ export default function Signuppage() {
       textAlign: "center",
     },
     input: {
-      marginBottom: "1rem",
+      width: "100%",
       padding: "0.75rem",
+      marginBottom: "1rem",
       fontSize: "1rem",
       borderRadius: "5px",
       border: "2px solid #A0F0E6",
@@ -102,7 +103,7 @@ export default function Signuppage() {
       outline: "none",
     },
     button: {
-      backgroundColor: "#4CAF50",
+      backgroundColor: "#1bb599",
       color: "#FFF",
       fontSize: "1.1rem",
       padding: "0.75rem",
@@ -117,9 +118,8 @@ export default function Signuppage() {
       fontSize: windowWidth > 611 ? "1rem" : "0.875rem",
     },
     link: {
-      color: "#FFEB3B",
-      textDecoration: "underline",
-      marginLeft: "0.5rem",
+      color: "#7ed8ff",
+      marginLeft: "0.3rem",
     },
   };
 
@@ -148,49 +148,53 @@ export default function Signuppage() {
           style={styles.input}
           required
         />
-        <input
-          label="Password"
-          placeholder="Password"
-          variant="outlined"
-          type={showPassword ? "text" : "password"}
-          value={user.password}
-          onChange={(e) => setUser({ ...user, password: e.target.value })}
-          style={styles.input}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  onClick={() => setShowPassword(!showPassword)}
-                  edge="end"
-                >
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-          required
-        />
-        <input
-          label="Confirm Password"
-          placeholder="Confirm Password"
-          type={showcPassword ? "text" : "password"}
-          value={user.cpassword}
-          onChange={(e) => setUser({ ...user, cpassword: e.target.value })}
-          style={styles.input}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  onClick={() => setShowcPassword(!showcPassword)}
-                  edge="end"
-                >
-                  {showcPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-          required
-        />
+        <div style={{ position: "relative", width: "100%" }}>
+          <input
+            placeholder="Password"
+            type={showPassword ? "text" : "password"}
+            value={user.password}
+            onChange={(e) => setUser({ ...user, password: e.target.value })}
+            style={{ ...styles.input, paddingRight: "2.5rem" }}
+            required
+          />
+          <div
+            onClick={() => setShowPassword(!showPassword)}
+            style={{
+              position: "absolute",
+              right: "10px",
+              top: "39.5%",
+              transform: "translateY(-50%)",
+              cursor: "pointer",
+              color: "#ffffff",
+            }}
+          >
+            {showPassword ? <VisibilityOff /> : <Visibility />}
+          </div>
+        </div>
+
+        <div style={{ position: "relative", width: "100%" }}>
+          <input
+            placeholder="Confirm Password"
+            type={showcPassword ? "text" : "password"}
+            value={user.cpassword}
+            onChange={(e) => setUser({ ...user, cpassword: e.target.value })}
+            style={{ ...styles.input, paddingRight: "2.5rem" }}
+            required
+          />
+          <div
+            onClick={() => setShowcPassword(!showcPassword)}
+            style={{
+              position: "absolute",
+              right: "10px",
+              top: "39.5%",
+              transform: "translateY(-50%)",
+              cursor: "pointer",
+              color: "#ffffff",
+            }}
+          >
+            {showcPassword ? <VisibilityOff /> : <Visibility />}
+          </div>
+        </div>
         <button type="submit" style={styles.button}>
           Signup
         </button>
@@ -198,7 +202,7 @@ export default function Signuppage() {
       <p style={styles.footerText}>
         Already have an account?
         <Link href="/login" style={styles.link}>
-          Login Now!
+          Log in
         </Link>
       </p>
     </div>
