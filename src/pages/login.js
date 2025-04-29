@@ -140,7 +140,7 @@ export default function LoginPage() {
           />
           <IconButton
             onClick={() => setShowPassword(!showPassword)}
-            style={{ position: "absolute", right: "8px", top: "50%", transform: "translateY(-50%)" }}
+            style={{ position: "absolute", right: "8px", top: "38%", transform: "translateY(-50%)", color:"white" }}
           >
             {showPassword ? <VisibilityOff /> : <Visibility />}
           </IconButton>
