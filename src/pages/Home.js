@@ -75,7 +75,7 @@ export default function Home() {
         </Head>
         <header style={headerStyle}>
           <div style={logoStyle}>
-            <img alt="logo" src="https://res.cloudinary.com/da2imhgtf/image/upload/v1717414763/svdurdbamvz2qri1ychm.png" style={{ height: '50px' }} />
+            <img alt="logo" src="https://res.cloudinary.com/da2imhgtf/image/upload/v1745956931/deawc3nxyaebfwnl1he8.png" style={{ height: '50px' }} />
           </div>
           {windowWidth > 675 && (
             <nav style={navStyle}>

@@ -61,7 +61,7 @@ export default function BlogPage() {
       <div style={{ fontFamily: 'Poppins, sans-serif', maxWidth: '1300px', margin: '0 auto', padding: windowWidth > 570 ?'30px' : "13px", borderRadius: "20px", boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)", background: "#f8f9fa" }}>
         <Head>
           <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-          <title>Blink & Blog - Blog</title>
+          <title>Blink & Blog</title>
         </Head>
         <header style={headerStyle}>
           <div style={logoStyle}>

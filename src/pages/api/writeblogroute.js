@@ -1,7 +1,7 @@
 import connectToDatabase from '@/config/db';
 import Blog from '@/models/blogmodel';
 const cookie = require('cookie');
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode/build/cjs';
 
 connectToDatabase();
 

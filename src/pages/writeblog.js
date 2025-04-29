@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CldUploadWidget, CldImage } from 'next-cloudinary';
+import { CldUploadWidget, CldImage } from 'next-cloudinary/dist';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
@@ -28,7 +28,6 @@ export default function WriteBlog() {
   };
 
   const handleSubmit = async () => {
-    if(window.alert("Do you want to publish your blog?")){
     try {
       const res = await axios.post('/api/writeblogroute', {
         title: title,
@@ -43,7 +42,6 @@ export default function WriteBlog() {
     } catch (error) {
       console.error('Error:', error);
     }
-  }
   };
 
   return (

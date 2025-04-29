@@ -79,6 +79,8 @@ export default function Home() {
           </div>
           <Link href="/signup">
             <p style={{
+              padding: "10px 20px",
+              borderRadius: "10px",
               color: "black",
               marginTop: "30px",
               fontSize: "25px",
@@ -89,7 +91,7 @@ export default function Home() {
               textDecoration: 'none', 
               display: 'inline-block', 
             }}>
-              Start Your Blogging Journey Now
+              Click To Start Your Journey... 
             </p>
           </Link>
         </div>
