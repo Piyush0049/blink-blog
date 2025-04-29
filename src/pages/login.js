@@ -49,29 +49,37 @@ export default function LoginPage() {
     },
     bgImage: {
       position: "absolute",
-      top: 0, left: 0,
-      width: "100%", height: "100%",
-      backgroundImage: "url('https://res.cloudinary.com/da2imhgtf/image/upload/v1717421094/hbee6ankimbppxkoojl4.jpg')",
-      backgroundSize: "cover", backgroundPosition: "center",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      backgroundImage:
+        "url('https://res.cloudinary.com/da2imhgtf/image/upload/v1717421094/hbee6ankimbppxkoojl4.jpg')",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
       filter: "blur(8px)",
-      opacity: 0.4,         
-      zIndex: -1
+      opacity: 0.4,
+      zIndex: -1,
     },
     header: {
-        color: "#d0fdfa",
-        textShadow: "2px 2px 8px rgba(0,0,0,0.3)",
-        marginBottom: "1rem",
-        fontSize: windowWidth > 477 ? "2.5rem" : "1.8rem",
-        marginBottom: windowWidth > 477 ? "2.5rem" : "0",
-        textAlign: "center",
+      color: "#d0fdfa",
+      textShadow: "2px 2px 8px rgba(0,0,0,0.3)",
+      marginBottom: "0.5rem",
+      fontSize: windowWidth > 477 ? "2.5rem" : "1.8rem",
+      marginBottom: windowWidth > 477 ? "2.5rem" : "0",
+      textAlign: "center",
     },
     card: {
       position: "relative",
       backgroundColor: "none",
       borderRadius: "10px",
+      paddingTop : "2rem",
+      paddingLeft : "2rem",
+      paddingRight : "2rem",
+      paddingBottom : "0.5rem",
       width: windowWidth > 460 ? "400px" : "90%",
-      maxWidth: "400px",
-      zIndex: 1
+      maxWidth: "450px",
+      zIndex: 1,
     },
     input: {
       width: "100%",
@@ -79,10 +87,10 @@ export default function LoginPage() {
       marginBottom: "1rem",
       fontSize: "1rem",
       borderRadius: "5px",
-      border: "2px solid #A0F0E6",     
-      backgroundColor: "transparent",   
+      border: "2px solid #A0F0E6",
+      backgroundColor: "transparent",
       color: "#FFFFFF",
-      outline: "none"
+      outline: "none",
     },
     button: {
       width: "100%",
@@ -94,30 +102,30 @@ export default function LoginPage() {
       color: "white",
       cursor: "pointer",
       transition: "background-color 0.3s",
-      marginTop: "0.5rem"
+      marginTop: "0.5rem",
     },
     error: {
       color: "#D32F2F",
       marginTop: "0.5rem",
-      textAlign: "center"
+      textAlign: "center",
     },
     footerText: {
       marginTop: "1rem",
       color: "#FFFFFF",
-      fontSize: windowWidth > 611 ? "1rem" : "0.875rem"
+      fontSize: windowWidth > 611 ? "1rem" : "0.875rem",
     },
     link: {
       color: "#FFEB3B",
       textDecoration: "underline",
-      marginLeft: "0.5rem"
-    }
+      marginLeft: "0.5rem",
+    },
   };
 
   return (
     <div style={styles.container}>
       <div style={styles.bgImage} />
 
-      <h1 style={styles.header}>Login With Your Account</h1>
+      <h1 style={styles.header}>Login Your Account</h1>
 
       <form onSubmit={login} style={styles.card}>
         <input
@@ -140,7 +148,13 @@ export default function LoginPage() {
           />
           <IconButton
             onClick={() => setShowPassword(!showPassword)}
-            style={{ position: "absolute", right: "8px", top: "38%", transform: "translateY(-50%)", color:"white" }}
+            style={{
+              position: "absolute",
+              right: "8px",
+              top: "38%",
+              transform: "translateY(-50%)",
+              color: "white",
+            }}
           >
             {showPassword ? <VisibilityOff /> : <Visibility />}
           </IconButton>
@@ -154,13 +168,41 @@ export default function LoginPage() {
 
       <p style={styles.footerText}>
         Don’t have an account?
-        <Link href="/signup" style={styles.link}>Signup Now!</Link>
+        <Link href="/signup" style={styles.link}>
+          Signup Now!
+        </Link>
       </p>
 
       <style jsx>{`
-        @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
-        @keyframes slideIn { from { transform: translateY(-20px); opacity: 0 } to { transform: translateY(0); opacity: 1 } }
-        @keyframes pulse { 0% { transform: scale(1) } 50% { transform: scale(1.05) } 100% { transform: scale(1) } }
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+        @keyframes slideIn {
+          from {
+            transform: translateY(-20px);
+            opacity: 0;
+          }
+          to {
+            transform: translateY(0);
+            opacity: 1;
+          }
+        }
+        @keyframes pulse {
+          0% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.05);
+          }
+          100% {
+            transform: scale(1);
+          }
+        }
       `}</style>
     </div>
   );

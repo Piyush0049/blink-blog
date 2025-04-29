@@ -56,7 +56,7 @@ export default function Signuppage() {
       alignItems: "center",
       height: "100vh",
       overflow: "hidden",
-      fontFamily: 'Poppins, sans-serif',
+      fontFamily: "Poppins, sans-serif",
     },
     bgImage: {
       position: "absolute",
@@ -73,7 +73,10 @@ export default function Signuppage() {
       zIndex: -1,
     },
     formWrapper: {
-      padding: "2rem",
+      paddingTop: "2rem",
+      paddingLeft: "2rem",
+      paddingRight: "2rem",
+      paddingBottom: "0.5rem",
       borderRadius: "10px",
       width: windowWidth > 465 ? "450px" : "90%",
       maxWidth: "450px",
@@ -84,7 +87,7 @@ export default function Signuppage() {
     header: {
       color: "#d0fdfa",
       textShadow: "2px 2px 8px rgba(0,0,0,0.3)",
-      marginBottom: "1.2rem",
+      marginBottom: "0rem",
       fontSize: windowWidth > 477 ? "2.5rem" : "1.8rem",
       textAlign: "center",
     },
@@ -107,6 +110,16 @@ export default function Signuppage() {
       border: "none",
       cursor: "pointer",
       transition: "background-color 0.3s",
+    },
+    footerText: {
+      marginTop: "1rem",
+      color: "#FFFFFF",
+      fontSize: windowWidth > 611 ? "1rem" : "0.875rem",
+    },
+    link: {
+      color: "#FFEB3B",
+      textDecoration: "underline",
+      marginLeft: "0.5rem",
     },
   };
 
@@ -182,12 +195,12 @@ export default function Signuppage() {
           Signup
         </button>
       </form>
-      <h3 style={{ color: "#d0fdfa", marginTop: "1rem" }}>
+      <p style={styles.footerText}>
         Already have an account?
-        <Link href="/login" style={{ color: "#FFEB3B", marginLeft: "0.5rem" }}>
+        <Link href="/login" style={styles.link}>
           Login Now!
         </Link>
-      </h3>
+      </p>
     </div>
   );
 }
