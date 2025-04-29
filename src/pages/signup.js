@@ -74,8 +74,8 @@ export default function Signuppage() {
     },
     formWrapper: {
       paddingTop: "2rem",
-      paddingLeft: "2rem",
-      paddingRight: "2rem",
+      paddingLeft: "1rem",
+      paddingRight: "1rem",
       paddingBottom: "0.5rem",
       borderRadius: "10px",
       width: windowWidth > 465 ? "450px" : "90%",
