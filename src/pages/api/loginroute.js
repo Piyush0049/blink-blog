@@ -3,7 +3,6 @@ import jwt from 'jsonwebtoken';
 import connectToDatabase from '@/config/db';
 import User from '@/models/usermodel';
 import cookie from 'cookie';
-import jwt_decode from 'jwt-decode/build/cjs';
 
 connectToDatabase();
 
