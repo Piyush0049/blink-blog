@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
 import { Menu, X } from "lucide-react";
+import axios from "axios";
 
 // Desktop Navbar
 const DesktopNavbar = ({ router, handleLogout }) => (
@@ -155,7 +156,7 @@ const Header = () => {
 
   const handleLogout = async () => {
     try {
-      const res = await fetch("/api/logoutroute", { method: "POST" });
+      const res = await axios.post("/api/logoutroute", {}, { withCredentials: true });
       if (res.status === 200) {
         toast.success("Logged out successfully! 🎉");
         router.push("/login");

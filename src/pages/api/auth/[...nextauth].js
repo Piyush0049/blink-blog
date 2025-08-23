@@ -67,7 +67,7 @@ export default async function auth(req, res) {
           res.setHeader("Set-Cookie", serialize("token", appToken, {
             httpOnly: true,
             maxAge: 7 * 24 * 60 * 60,
-            sameSite: "strict",
+            sameSite: "lax",
             path: "/",
             secure: process.env.NODE_ENV === "production",
           }));

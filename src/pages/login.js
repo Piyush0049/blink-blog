@@ -30,10 +30,13 @@ export default function LoginPage() {
     }
   };
 
-  const handleGoogleLogin = async() => {
+  const handleGoogleLogin = () => {
     toast.loading("Redirecting to Google...");
-    const res = await signIn("google", { callbackUrl: "/Home" });
-    console.log(res)
+    // let NextAuth do the redirect to Google
+    signIn("google", {
+      callbackUrl: `${window.location.origin}/Home`,
+      redirect: true, // ensure default redirect behavior
+    });
   };
 
   return (
