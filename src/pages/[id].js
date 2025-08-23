@@ -1,40 +1,31 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Head from 'next/head';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import CommentSection from "@/components/header/commentsection"; // Ensure the path is correct
+import Head from "next/head";
+import Link from "next/link";
+import CommentSection from "@/components/commentsection";
+import { useRouter } from "next/router";
+import Header from "@/components/header";
 
 export default function BlogPage() {
-  const router = useRouter();
-  const [id, setid] = useState("");
+  const route = useRouter();
+  const [id, setId] = useState("");
   const [blog, setBlog] = useState(null);
   const [user, setUser] = useState(null);
+  const [windowWidth, setWindowWidth] = useState(0);
 
-  const [windowWidth, setWindowWidth] = useState("");
   useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    // Set initial width
+    const handleResize = () => setWindowWidth(window.innerWidth);
     handleResize();
-
-    // Add event listener
     window.addEventListener("resize", handleResize);
-
-    // Clean up event listener on component unmount
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-
   useEffect(() => {
-    const { id } = router.query;
-    setid(id);
-  }, [id]);
+    const { id } = route.query;
+    if (id) setId(id);
+  }, [route.query]);
+
   useEffect(() => {
     if (id) {
       fetchBlog(id);
@@ -45,11 +36,8 @@ export default function BlogPage() {
     try {
       const res = await axios.get(`/api/${id}`);
       if (res.status === 200) {
-        console.log('API response:', res);
         setBlog(res.data.blogdet);
         setUser(res.data.userdet);
-      } else {
-        console.log("Error fetching blog, status:", res.status);
       }
     } catch (error) {
       console.log("Error fetching blog:", error);
@@ -57,124 +45,77 @@ export default function BlogPage() {
   };
 
   return (
-    <div style={{ maxWidth: '100%', background: "#f8f9fa", minHeight: "100vh", padding:  windowWidth > 460 ? "20px 20px" : "5px 0", background: "linear-gradient(135deg, #99FCED 0%, #DBFF7B 100%)", }}>
-      <div style={{ fontFamily: 'Poppins, sans-serif', maxWidth: '1300px', margin: '0 auto', padding: windowWidth > 570 ?'30px' : "13px", borderRadius: "20px", boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)", background: "#f8f9fa" }}>
-        <Head>
-          <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-          <title>Blink & Blog</title>
-        </Head>
-        <header style={headerStyle}>
-          <div style={logoStyle}>
-            <Link href="/Home" passHref>
-              <img alt="logo" src="https://res.cloudinary.com/da2imhgtf/image/upload/v1745956931/deawc3nxyaebfwnl1he8.png" style={{ height: '50px' }} />
-            </Link>
-          </div>
-          <nav style={navStyle}>
+    <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-teal-50 to-white font-sans text-gray-800 relative ">
+      <Head>
+        <title>Blink & Blog</title>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
 
-            <Link href="/Home" style={{
-              ...linkStyle,
-              fontSize: windowWidth > 460 ?'16px' : "13px",
-            }}><b>Explore More</b></Link>
-            {windowWidth > 460 && (
-              <Link href="/Home" style={linkStyle}><b>About</b></Link>
-            )}
+      <div className="fixed top-20 left-10 w-60 h-60 bg-gradient-to-br from-teal-300 to-cyan-400 rounded-full opacity-20 blur-3xl animate-float-slow pointer-events-none" />
+      <div className="fixed bottom-20 right-10 w-72 h-72 bg-gradient-to-br from-sky-400 to-indigo-400 rounded-full opacity-20 blur-3xl animate-float-slower pointer-events-none" />
 
-          </nav>
-        </header>
-        <main style={{ ...mainStyle, minHeight: "1000px", width: "auto" }}>
+      <div className="max-w-6xl mx-auto p-4 md:p-8">
+        {/* Header */}
+        <Header />
+
+        {/* Blog Content */}
+        <main className="flex justify-center pt-6 sm:pt-8">
           {blog ? (
-            <div style={{...blogContainerStyle, 
-              padding: windowWidth > 430 ?'20px' : "5px",}}>
-              <h1 style={{
-                ...blogTitleStyle,
-                fontSize: windowWidth > 850 ? '30px' : "20px",
-              }}>{blog.title}</h1>
-              <p style={{ ...blognameStyle, fontSize: windowWidth > 850 ? '20px' : "15px", }}> - {user.name}</p>
-              {blog.media.type === "image" ? (
-                <img src={blog.media.url} alt={blog.title} style={blogImageStyle} />
+            <article className="max-w-3xl w-full">
+              {/* Title */}
+              <h1 className="text-[20px] sm:text-2xl font-extrabold text-[#009781] mb-3 leading-snug">
+                {blog.title}
+              </h1>
+
+              {/* Author */}
+              <p className="text-[#02705F] font-semibold mb-3 sm:mb-8 text-right text-sm sm:text-base italic">
+                – {user?.name || "Author"}
+              </p>
+
+              {/* Media */}
+              {blog.media?.type === "image" ? (
+                <img
+                  src={blog.media.url}
+                  alt={blog.title}
+                  className="w-full rounded-2xl shadow-lg mb-8 object-cover max-h-[420px]"
+                  loading="lazy"
+                  draggable={false}
+                />
               ) : (
-                <video controls style={blogvideoStyle}>
+                <video
+                  controls
+                  className="w-full max-w-full rounded-2xl shadow-lg mb-8 object-cover max-h-[420px]"
+                >
                   <source src={blog.media.url} type="video/mp4" />
                 </video>
               )}
-              <p style={blogTextStyle}>{blog.blogText}</p>
-            </div>
+
+              {/* Blog Text (split into paragraphs) */}
+              <div className="prose prose-lg prose-teal max-w-none text-gray-800 leading-relaxed">
+                {blog.blogText
+                  .split(/\n\s*\n/) // split by double line breaks
+                  .map((para, idx) => (
+                    <p key={idx} className="mb-5">
+                      {para.trim()}
+                    </p>
+                  ))}
+              </div>
+            </article>
           ) : (
-            <p style={{color : "#00c0a0"}}>Loading...</p>
+            <p className="text-teal-600 text-center text-xl select-none">
+              Loading blog...
+            </p>
           )}
         </main>
-        <CommentSection />
+
+        {/* Comments Section */}
+        <section className="mt-16 pt-10">
+          <CommentSection />
+        </section>
       </div>
     </div>
   );
 }
-
-const headerStyle = {
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  padding: '10px 10px',
-  background: '#fff',
-  borderBottom: '1px solid #ddd'
-};
-
-const logoStyle = {};
-
-const navStyle = {
-  display: 'flex',
-  gap: '40px'
-};
-
-const linkStyle = {
-  textDecoration: 'none',
-  cursor: 'pointer',
-  color: "#03BDA1",
-  fontFamily: 'Poppins, sans-serif'
-};
-
-const mainStyle = {
-  paddingTop: '20px',
-  display: 'flex',
-  justifyContent: 'center',
-};
-
-const blogContainerStyle = {
-  maxWidth: '800px',
-};
-
-const blogTitleStyle = {
-  fontWeight: 'bold',
-  marginBottom: '20px',
-  fontFamily: 'Poppins, sans-serif',
-  color: "#009781",
-};
-
-const blognameStyle = {
-  fontWeight: 'bold',
-  marginBottom: '20px',
-  fontFamily: 'Poppins, sans-serif',
-  color: "#02705F",
-  position: "relative",
-  left: "83%"
-};
-
-const blogImageStyle = {
-  width: '100%',
-  borderRadius: '10px',
-  marginBottom: '20px',
-};
-
-const blogvideoStyle = {
-  width: '100%',
-  maxWidth: '400px', // Adjusted max width to make the video smaller
-  height: 'auto',
-  borderRadius: '10px',
-  objectFit: 'cover',
-  transition: 'transform 0.3s',
-};
-
-const blogTextStyle = {
-  fontSize: '18px',
-  lineHeight: '1.5',
-  color: "#3A4E4B"
-};

@@ -1,28 +1,20 @@
-const mongoose = require('mongoose');
+import mongoose, { Schema, model, models } from "mongoose";
 
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    unique: true,
+const userSchema = new Schema(
+  {
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    password: {
+      type: String,
+      required: function () {
+        return !this.isGoogleUser;
+      },
+    },
+    image: { type: String }, // optional: save Google profile pic
+    isGoogleUser: { type: Boolean, default: false }, // 👈 flag to know auth type
   },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-    required: true,
-    minlength: 5,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-});
+  { timestamps: true }
+);
 
-
-const User = mongoose.models.User || mongoose.model('User', userSchema);
-
-module.exports = User;
+const User = models.User || model("User", userSchema);
+export default User;

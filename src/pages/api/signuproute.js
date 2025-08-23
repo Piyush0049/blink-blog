@@ -34,8 +34,14 @@ export default async function handler(req, res) {
     await newUser.save();
 
     const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-
-    res.status(201).json({ token, user: { name: newUser.name, email: newUser.email } });
+    res.setHeader('Set-Cookie', cookie.serialize('token', token, {
+      httpOnly: true,
+      maxAge: 3600,
+      sameSite: 'strict',
+      path: '/',
+      secure: process.env.NODE_ENV === 'production'
+    }));
+    return res.status(200).json({ message: 'Signup successful!', user: { name: newUser.name, email: newUser.email, token : token } });
   } catch (error) {
     console.error('Error creating user:', error);
     res.status(500).json({ message: 'Internal server error' });

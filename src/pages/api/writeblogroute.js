@@ -1,7 +1,7 @@
 import connectToDatabase from '@/config/db';
 import Blog from '@/models/blogmodel';
 const cookie = require('cookie');
-import { jwtDecode } from 'jwt-decode';
+import jwtDecode from "jwt-decode";
 
 connectToDatabase();
 
@@ -13,12 +13,12 @@ export default async function handler(req, res) {
 
   const tokenvalue = cookies.token;
   console.log(tokenvalue);
-  
-  const { title, author, blogText, url, type } = req.body;
+
+  const { title, blogText, url, type } = req.body;
 
   const decoded = jwtDecode(tokenvalue);
-  console.log(decoded)
-  if (!title || !author || !blogText) {
+  console.log(decoded);
+  if (!title || !decoded.userId || !blogText) {
     return res.status(400).json({ message: 'Please provide title, author, and blog text' });
   }
 
@@ -26,11 +26,11 @@ export default async function handler(req, res) {
 
     const newBlog = new Blog({
       title,
-      author : decoded.userId,
+      author: decoded.userId,
       blogText,
       media: {
         url: url,
-        type : type
+        type: type
       },
     });
 

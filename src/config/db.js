@@ -1,10 +1,15 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-const connecttodatabase = ()=>{
-    mongoose.connect(process.env.DB_URI).then((data)=>{
-        console.log(`The dataBase has been connected to server : ${data.connection.host}`)
-    }).catch((error)=>{
-        console.log(error)
-    })
-}
-module.exports = connecttodatabase;
+const connecttodatabase = async () => {
+  if (mongoose.connection.readyState >= 1) {
+    return;
+  }
+  try {
+    await mongoose.connect(process.env.DB_URI);
+    console.log("✅ Database connected successfully");
+  } catch (error) {
+    console.error("❌ Database connection failed", error);
+  }
+};
+
+export default connecttodatabase;

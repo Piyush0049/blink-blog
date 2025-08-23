@@ -36,7 +36,7 @@ export default async function handler(req, res) {
       secure: process.env.NODE_ENV === 'production'
     }));
 
-    return res.status(200).json({ message: 'Login successful', user: { name: user.name, email: user.email, token : token } });
+    return res.status(200).json({ message: 'Login successful!', user: { name: user.name, email: user.email, token : token } });
   } catch (error) {
     console.error('Error logging in user:', error);
     res.status(500).json({ message: 'Internal server error' });
