@@ -6,7 +6,7 @@ import { Menu, X } from "lucide-react";
 
 // Desktop Navbar
 const DesktopNavbar = ({ router, handleLogout }) => (
-  <header className="sticky top-0 z-20 backdrop-blur-xl bg-white/70 border border-white/40 rounded-2xl shadow-md px-6 py-3 flex justify-between items-center">
+  <header className="sticky top-0 z-20 backdrop-blur-xl bg-white/70 border border-white/40 rounded-b-2xl shadow-md px-6 py-3 flex justify-between items-center">
     {/* Logo */}
     <img
       src="https://res.cloudinary.com/da2imhgtf/image/upload/v1745956931/deawc3nxyaebfwnl1he8.png"

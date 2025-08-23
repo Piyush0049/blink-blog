@@ -65,7 +65,7 @@ export default function Home() {
       <div className="fixed top-20 left-10 w-60 h-60 bg-gradient-to-br from-teal-300 to-cyan-400 rounded-full opacity-20 blur-3xl animate-float-slow pointer-events-none" />
       <div className="fixed bottom-20 right-10 w-72 h-72 bg-gradient-to-br from-sky-400 to-indigo-400 rounded-full opacity-20 blur-3xl animate-float-slower pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto p-4 md:p-8">
+      <div className="max-w-7xl mx-auto p-4 sm:px-8">
         {/* Header */}
         <Header />
 
@@ -78,8 +78,8 @@ export default function Home() {
               className="w-full h-[400px] object-cover rounded-2xl transform group-hover:scale-105 transition duration-700"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-8">
-              <h1 className="text-3xl md:text-4xl font-semibold text-white drop-shadow-lg">
-                Blink & Blog — Every Story Has a Voice
+              <h1 className="text-3xl md:text-3xl font-semibold text-white drop-shadow-lg">
+                Blink & Blog — Every Story is a Voice
               </h1>
               <p className="text-gray-200 mt-2 text-base md:text-lg">
                 Read, share, and create blogs that inspire.
