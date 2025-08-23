@@ -115,7 +115,7 @@ export default function Home() {
             {blogs.slice(0, 3).map((blog, index) => (
               <article
                 key={blog._id || index}
-                onClick={() => router.push(`/${blog._id}`)}
+                onClick={() => router.push(`/blog/${blog._id}`)}
                 className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl cursor-pointer transform hover:-translate-y-2 transition-all duration-300"
               >
                 <div className="overflow-hidden">
@@ -180,7 +180,7 @@ export default function Home() {
                   {blogs.slice(currentPage * 3, currentPage * 3 + 3).map((blog, index) => (
                     <article
                       key={blog._id || index}
-                      onClick={() => router.push(`/${blog._id}`)}
+                      onClick={() => router.push(`/blog/${blog._id}`)}
                       className="bg-white rounded-2xl shadow-md hover:shadow-xl cursor-pointer transform hover:-translate-y-2 transition-all duration-300"
                     >
                       <div className="overflow-hidden rounded-t-2xl">
@@ -212,7 +212,7 @@ export default function Home() {
             {blogs.slice(-6).map((blog, index) => (
               <article
                 key={blog._id || index}
-                onClick={() => router.push(`/${blog._id}`)}
+                onClick={() => router.push(`/blog/${blog._id}`)}
                 className="bg-white rounded-2xl shadow-md hover:shadow-xl cursor-pointer transform hover:-translate-y-2 transition-all duration-300"
               >
                 <div className="overflow-hidden rounded-t-2xl">

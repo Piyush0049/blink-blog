@@ -81,8 +81,10 @@ export default function WriteBlog() {
         type: mediaUrl ? mediaType : undefined,
       });
       if (res.status === 201) {
-        toast.success("Blog published");
-        setTimeout(() => router.push(`/${res.data._id}`), 600);
+        toast.success("Blog published", {
+          autoClose: 3000, // 3 seconds
+        });
+        setTimeout(() => router.push(`/blog/${res.data._id}`), 600);
       } else {
         toast.error("Failed to publish");
       }
@@ -150,7 +152,7 @@ export default function WriteBlog() {
       <div className="pointer-events-none fixed -bottom-24 -right-16 w-[32rem] h-[32rem] rounded-full bg-gradient-to-br from-sky-300 to-indigo-300 opacity-20 blur-3xl" />
 
       {/* Header */}
-      <Header/>
+      <Header />
 
       {/* Editor Layout */}
       <main className="max-w-7xl mx-auto px-4 md:px-8 py-8 grid grid-cols-1 lg:grid-cols-3 gap-8">

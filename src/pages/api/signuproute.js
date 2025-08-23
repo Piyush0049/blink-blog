@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import connecttodatabase from '@/config/db';
 import User from '@/models/usermodel';
+import cookie from 'cookie';
 
 connecttodatabase();
 

@@ -33,7 +33,8 @@ export default function Signuppage() {
         email: user.email,
         password: user.password,
       });
-      if (res.status === 201) {
+      console.log(res);
+      if (res.status === 200) {
         toast.success("Account created successfully 🎉");
         window.location.reload();
         router.push("/home");
@@ -41,6 +42,7 @@ export default function Signuppage() {
         toast.error(res.data.message || "Signup failed");
       }
     } catch (err) {
+      console.log(err);
       toast.error("An error occurred during signup ⚠️");
     }
   };
@@ -48,7 +50,7 @@ export default function Signuppage() {
   // ✅ Google signup
   const handleGoogleSignup = () => {
     toast.loading("Redirecting to Google... ⏳");
-    signIn("google", { callbackUrl: "/home" });
+    signIn("google", { callbackUrl: "/Home" });
   };
 
   return (
