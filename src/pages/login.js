@@ -18,6 +18,7 @@ export default function LoginPage() {
     e.preventDefault();
     try {
       const res = await axios.post("/api/loginroute", user);
+      console.log(res); 
       if (res.status === 200) {
         localStorage.setItem("token", res.data.user.token);
         toast.success("Login successful! 🎉"); // ✅ success toast

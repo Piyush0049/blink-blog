@@ -8,15 +8,16 @@ export async function middleware(req) {
 
   const publicRoutes = ["/", "/login", "/signup"];
 
-  // allow NextAuth flow APIs through
-  if (pathname.startsWith("/api/auth/")) return NextResponse.next();
+  // ✅ allow ALL API routes through (skip middleware for them)
+  if (pathname.startsWith("/api/")) {
+    return NextResponse.next();
+  }
 
   const cookies = req.cookies;
   const token = cookies.get("token")?.value;
   let authOk = false;
 
   if (token) {
-    // If we have our own token, verify signature & expiry
     try {
       await jwtVerify(token, new TextEncoder().encode(process.env.JWT_SECRET));
       authOk = true;
@@ -27,8 +28,8 @@ export async function middleware(req) {
     authOk = false;
   }
 
-  // If user is logged in (has valid auth), **block** public routes and allow the rest
   if (authOk) {
+    // if logged in and visiting public route → redirect to /Home
     if (publicRoutes.includes(pathname)) {
       url.pathname = "/Home";
       return NextResponse.redirect(url);
@@ -36,11 +37,12 @@ export async function middleware(req) {
     return NextResponse.next();
   }
 
-  // If not authenticated, allow ONLY public routes; otherwise redirect to /login
+  // not logged in but visiting public route → allow
   if (publicRoutes.includes(pathname)) {
     return NextResponse.next();
   }
 
+  // not logged in and trying to visit protected route → redirect to /login
   url.pathname = "/login";
   return NextResponse.redirect(url);
 }
