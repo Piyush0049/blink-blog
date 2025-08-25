@@ -32,7 +32,6 @@ export default function Custom404() {
         </Link>
       </div>
 
-      {/* Decorative glowing orb */}
       <div className="absolute -top-10 -left-10 w-60 h-60 bg-teal-400 rounded-full mix-blend-overlay filter blur-3xl opacity-30 animate-pulse"></div>
     </div>
   );
