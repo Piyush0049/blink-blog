@@ -86,9 +86,8 @@ const MobileSidebar = ({ router, handleLogout }) => {
 
           {/* Sidebar Panel */}
           <div
-            className={`relative w-72 h-full bg-gradient-to-b from-white to-teal-50 shadow-2xl p-6 flex flex-col transition-transform duration-300 transform ${
-              isOpen ? "translate-x-0" : "-translate-x-full"
-            }`}
+            className={`relative w-72 h-full bg-gradient-to-b from-white to-teal-50 shadow-2xl p-6 flex flex-col transition-transform duration-300 transform ${isOpen ? "translate-x-0" : "-translate-x-full"
+              }`}
           >
             {/* Close Button */}
             <button
@@ -142,7 +141,6 @@ const MobileSidebar = ({ router, handleLogout }) => {
               )}
             </nav>
 
-            {/* Footer */}
             <div className="mt-auto pt-8 text-xs text-gray-500 border-t border-gray-200">
               © {new Date().getFullYear()} Blink & Blog. All rights reserved.
             </div>
