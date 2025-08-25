@@ -77,7 +77,7 @@ const MobileSidebar = ({ router, handleLogout }) => {
 
       {/* Sidebar */}
       {isOpen && (
-        <div className="fixed inset-0 z-40 flex">
+        <div className="fixed inset-0 flex z-[2000]">
           {/* Overlay */}
           <div
             className="fixed inset-0 bg-black/50 backdrop-blur-sm"
