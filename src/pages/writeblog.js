@@ -139,13 +139,6 @@ export default function WriteBlog() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-teal-50 to-cyan-50 text-gray-800 relative font-[Poppins]">
       <Toaster position="top-right" />
-      <Head>
-        <title>Blink & Blog</title>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
 
       {/* background accents */}
       <div className="pointer-events-none fixed -top-24 -left-16 w-96 h-96 rounded-full bg-gradient-to-br from-teal-200 to-cyan-300 opacity-20 blur-3xl" />

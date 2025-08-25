@@ -32,13 +32,6 @@ export default function MyBlogs() {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-teal-50 to-white font-sans text-gray-800 relative overflow-hidden">
-            <Head>
-                <title>Blink & Blog</title>
-                <link
-                    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
-                    rel="stylesheet"
-                />
-            </Head>
 
             {/* Background blobs */}
             <div className="fixed top-20 left-10 w-56 h-56 bg-gradient-to-br from-teal-400 to-cyan-400 rounded-full opacity-20 blur-3xl animate-float-slow pointer-events-none" />
