@@ -2,10 +2,10 @@
 import React, { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
-import { Menu, X } from "lucide-react";
+import { Menu, X, BookOpen, LogOut, Compass, PenTool } from "lucide-react";
 import axios from "axios";
 
-// Desktop Navbar
+// -------------------- Desktop Navbar --------------------
 const DesktopNavbar = ({ router, handleLogout }) => (
   <header className="sticky top-0 z-20 backdrop-blur-xl bg-white/70 border border-white/40 rounded-b-2xl shadow-md px-6 py-3 flex justify-between items-center">
     {/* Logo */}
@@ -16,7 +16,7 @@ const DesktopNavbar = ({ router, handleLogout }) => (
       className="h-10 md:h-12 hover:cursor-pointer"
     />
     <nav className="flex space-x-8 text-teal-700 font-medium text-sm md:text-base items-center">
-      <button
+      {/* <button
         onClick={() =>
           document
             .getElementById("exploreSection")
@@ -25,10 +25,19 @@ const DesktopNavbar = ({ router, handleLogout }) => (
         className="hover:text-teal-500 transition"
       >
         Explore
+      </button> */}
+
+      <button
+        onClick={() => router.push("/myblogs")}
+        className="hover:text-teal-500 transition"
+      >
+        My Blogs
       </button>
+
       <button onClick={handleLogout} className="hover:text-teal-500 transition">
         Log Out
       </button>
+
       {router.pathname !== "/writeblog" && (
         <button
           onClick={() => router.push("/writeblog")}
@@ -41,16 +50,27 @@ const DesktopNavbar = ({ router, handleLogout }) => (
   </header>
 );
 
-
+// -------------------- Mobile Sidebar --------------------
 const MobileSidebar = ({ router, handleLogout }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const NavItem = ({ icon: Icon, label, onClick }) => (
+    <button
+      onClick={onClick}
+      className="flex items-center space-x-3 py-3 px-4 rounded-lg hover:bg-teal-100/70 transition"
+    >
+      <Icon size={20} className="text-teal-600" />
+      <span className="text-teal-700 font-medium">{label}</span>
+    </button>
+  );
 
   return (
     <>
       {/* Hamburger button */}
       <button
         onClick={() => setIsOpen(true)}
-        className="text-teal-700 focus:outline-none"
+        className="text-teal-700 focus:outline-none mt-4 bg-teal-100 p-2 rounded-3xl shadow-2xl sticky top-4 z-1000"
+
       >
         <Menu size={28} />
       </button>
@@ -79,7 +99,7 @@ const MobileSidebar = ({ router, handleLogout }) => {
             </button>
 
             {/* Logo */}
-            <div className="flex items-center mb-10">
+            <div className="flex items-center justify-center mt-10 mb-10">
               <img
                 src="https://res.cloudinary.com/da2imhgtf/image/upload/v1745956931/deawc3nxyaebfwnl1he8.png"
                 alt="logo"
@@ -87,35 +107,38 @@ const MobileSidebar = ({ router, handleLogout }) => {
                   router.push("/Home");
                   setIsOpen(false);
                 }}
-                className="h-12 cursor-pointer hover:scale-105 transition-transform"
+                className="h-[75px] cursor-pointer hover:scale-105 transition-transform"
               />
             </div>
 
             {/* Nav Links */}
-            <nav className="flex flex-col space-y-6 text-teal-700 font-medium text-lg">
-              <button
+            <nav className="flex flex-col space-y-2">
+              {/* <NavItem
+                icon={Compass}
+                label="Explore"
                 onClick={() => {
                   document
                     .getElementById("exploreSection")
                     ?.scrollIntoView({ behavior: "smooth" });
                   setIsOpen(false);
                 }}
-                className="flex items-center space-x-2 hover:text-teal-600 transition"
-              >
-                <span>🔎</span>
-                <span>Explore</span>
-              </button>
-
-              <button
+              /> */}
+              <NavItem
+                icon={BookOpen}
+                label="My Blogs"
+                onClick={() => {
+                  router.push("/myblogs");
+                  setIsOpen(false);
+                }}
+              />
+              <NavItem
+                icon={LogOut}
+                label="Log Out"
                 onClick={() => {
                   handleLogout();
                   setIsOpen(false);
                 }}
-                className="flex items-center space-x-2 hover:text-teal-600 transition"
-              >
-                <span>🚪</span>
-                <span>Log Out</span>
-              </button>
+              />
 
               {router.pathname !== "/writeblog" && (
                 <button
@@ -123,16 +146,16 @@ const MobileSidebar = ({ router, handleLogout }) => {
                     router.push("/writeblog");
                     setIsOpen(false);
                   }}
-                  className="mt-6 bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 text-white font-medium px-5 py-3 rounded-xl shadow-md text-base transition-transform hover:scale-105"
+                  className="mt-6 flex items-center justify-center space-x-2 bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 text-white font-medium px-5 py-3 rounded-xl shadow-md text-base transition-transform hover:scale-105"
                 >
-                  ✍ Start Writing
+                  <PenTool size={18} /> <span>Start Writing</span>
                 </button>
               )}
             </nav>
 
             {/* Footer */}
-            <div className="mt-auto pt-8 text-sm text-gray-500 border-t border-gray-200">
-              © {new Date().getFullYear()} MyBlog. All rights reserved.
+            <div className="mt-auto pt-8 text-xs text-gray-500 border-t border-gray-200">
+              © {new Date().getFullYear()} Blink & Blog. All rights reserved.
             </div>
           </div>
         </div>
@@ -141,7 +164,7 @@ const MobileSidebar = ({ router, handleLogout }) => {
   );
 };
 
-
+// -------------------- Header Wrapper --------------------
 const Header = () => {
   const router = useRouter();
   const [isMobile, setIsMobile] = useState(false);
@@ -170,15 +193,12 @@ const Header = () => {
   };
 
   return (
-
     <>
-      {
-        isMobile ? (
-          <MobileSidebar router={router} handleLogout={handleLogout} />
-        ) : (
-          <DesktopNavbar router={router} handleLogout={handleLogout} />
-        )
-      }
+      {isMobile ? (
+        <MobileSidebar router={router} handleLogout={handleLogout} />
+      ) : (
+        <DesktopNavbar router={router} handleLogout={handleLogout} />
+      )}
     </>
   );
 };
