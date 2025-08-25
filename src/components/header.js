@@ -111,7 +111,6 @@ const MobileSidebar = ({ router, handleLogout }) => {
               />
             </div>
 
-            {/* Nav Links */}
             <nav className="flex flex-col space-y-2">
               <NavItem
                 icon={BookOpen}
