@@ -1,40 +1,50 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ✨ Blink & Blog – Every Story is a Voice 📖
 
-## Getting Started
+![Next.js](https://img.shields.io/badge/Next.js-black?logo=next.js&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-38B2AC?logo=tailwind-css&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?logo=mongodb&logoColor=white)
+![Framer Motion](https://img.shields.io/badge/Framer%20Motion-E4405F?logo=framer&logoColor=white)
+![Cloudinary](https://img.shields.io/badge/Cloudinary-4285F4?logo=cloudinary&logoColor=white)
+![AI Powered](https://img.shields.io/badge/AI-Powered-orange)
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🌍 Introduction
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Blink & Blog** is a **modern blogging platform** where every story becomes a voice.  
+It’s built with **Next.js + Tailwind CSS** and powered with **AI-generated content, Cloudinary uploads, Framer Motion animations, and MongoDB for persistence**.  
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Whether you want to **share knowledge, tell stories, or explore trends** – Blink & Blog helps you do it beautifully and effortlessly.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+---
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## 🌟 Features
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- 📝 **Write & Edit Blogs** – Create rich blogs with image & video support.  
+- 🤖 **AI Blog Assistant** – Generate blog drafts with different tones and word-lengths.  
+- 🔥 **Trending, Latest & Featured** – Discover blogs with dynamic categories.  
+- 🖼️ **Cloudinary Uploads** – Upload and preview images/videos seamlessly.  
+- 🎨 **Modern UI** – Glassmorphism, gradients, and animations with TailwindCSS + Framer Motion.  
+- 📱 **Responsive Design** – Works great on **mobile, tablet, and desktop**.  
+- 🔐 **Secure APIs** – CRUD operations with proper error handling.  
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## ⚙️ Tech Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Frontend:**  
+- [Next.js 13+](https://nextjs.org/) – React Framework  
+- [Tailwind CSS](https://tailwindcss.com/) – Styling  
+- [Framer Motion](https://www.framer.com/motion/) – Animations  
+- [Lucide Icons](https://lucide.dev/) – Modern Icons  
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+**Backend & Others:**  
+- [MongoDB](https://www.mongodb.com/) – Database  
+- [Mongoose](https://mongoosejs.com/) – ODM for MongoDB  
+- [Axios](https://axios-http.com/) – HTTP Requests  
+- [Cloudinary](https://cloudinary.com/) – Media Storage  
+- [Gemini / AI API] – AI-powered blog generation  
+- [React Hot Toast](https://react-hot-toast.com/) – Beautiful Notifications  
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
