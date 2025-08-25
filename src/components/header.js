@@ -113,16 +113,6 @@ const MobileSidebar = ({ router, handleLogout }) => {
 
             {/* Nav Links */}
             <nav className="flex flex-col space-y-2">
-              {/* <NavItem
-                icon={Compass}
-                label="Explore"
-                onClick={() => {
-                  document
-                    .getElementById("exploreSection")
-                    ?.scrollIntoView({ behavior: "smooth" });
-                  setIsOpen(false);
-                }}
-              /> */}
               <NavItem
                 icon={BookOpen}
                 label="My Blogs"
