@@ -16,14 +16,16 @@ export default async function handler(req, res) {
 
     try {
         const model = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
+        // slice content smaller
         const prompt = `
-Suggest the most relevant 3–5 interests based on this blog:
+Suggest 3–5 interests based on this blog:
 Title: "${title}"
-Content snippet: "${content.slice(0, 500)}"
+Content snippet: "${content.slice(0, 150)}"
 
 Use only from this list: [${interests.join(", ")}]
 Return JSON array only, e.g. ["Technology", "AI"].
-    `;
+`;
+
 
         const result = await model.generateContent(prompt);
         const text = await result.response.text();
@@ -39,7 +41,7 @@ Return JSON array only, e.g. ["Technology", "AI"].
         }
 
         const filtered = parsed.filter(i => interests.includes(i));
-        
+
         return res.status(200).json({ interests: filtered });
     } catch (err) {
         console.error("AI interest selection error:", err);
