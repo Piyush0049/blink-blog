@@ -29,6 +29,7 @@ export default function UserProfile() {
             if (res.status === 200) {
                 setUser(res.data.user);
             }
+            console.log(res.data);
         } catch (error) {
             console.error("Error fetching user profile:", error);
             toast.error("Failed to load profile.");
@@ -86,11 +87,31 @@ export default function UserProfile() {
                                         {user.bio}
                                     </p>
                                 ) : (
-                                    <p className="text-gray-400 italic">
+                                    <p className="text-gray-400 italic bg-gray-50 p-5 rounded-lg shadow-sm">
                                         This user hasn’t written a bio yet.
                                     </p>
                                 )}
+
+                                {/* Interests Section */}
+                                <h2 className="text-xl font-semibold text-gray-700 mt-6">Interests</h2>
+                                {user.interests && user.interests.length > 0 ? (
+                                    <div className="flex flex-wrap gap-3 mt-2">
+                                        {user.interests.map((interest, idx) => (
+                                            <span
+                                                key={idx}
+                                                className="px-4 py-2 bg-teal-100 text-teal-800 rounded-full text-sm font-medium shadow-sm hover:bg-teal-200 transition"
+                                            >
+                                                {interest}
+                                            </span>
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <p className="text-gray-400 italic mt-2 bg-gray-50 p-3 rounded-lg shadow-sm">
+                                        Not mentioned
+                                    </p>
+                                )}
                             </div>
+
                         </motion.div>
                     ) : (
                         <p className="text-red-500 text-center py-20">

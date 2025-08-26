@@ -25,7 +25,7 @@ export default async function handler(req, res) {
       }
 
       // ✅ Fetch public profile details only
-      const otherUser = await User.findById(id).select("_id name image bio createdAt");
+      const otherUser = await User.findById(id).select("_id name image bio interests createdAt");
 
       if (!otherUser) {
         return res.status(404).json({ message: 'User not found' });
