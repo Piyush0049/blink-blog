@@ -2,13 +2,11 @@
 import React, { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
-import { Menu, X, BookOpen, LogOut, Compass, PenTool } from "lucide-react";
+import { Menu, X, BookOpen, LogOut, PenTool, User } from "lucide-react";
 import axios from "axios";
 
-// -------------------- Desktop Navbar --------------------
 const DesktopNavbar = ({ router, handleLogout }) => (
   <header className="sticky top-0 z-20 backdrop-blur-xl bg-white/70 border border-white/40 rounded-b-2xl shadow-md px-6 py-3 flex justify-between items-center">
-    {/* Logo */}
     <img
       src="https://res.cloudinary.com/da2imhgtf/image/upload/v1745956931/deawc3nxyaebfwnl1he8.png"
       alt="logo"
@@ -16,28 +14,21 @@ const DesktopNavbar = ({ router, handleLogout }) => (
       className="h-10 md:h-12 hover:cursor-pointer"
     />
     <nav className="flex space-x-8 text-teal-700 font-medium text-sm md:text-base items-center">
-      {/* <button
-        onClick={() =>
-          document
-            .getElementById("exploreSection")
-            ?.scrollIntoView({ behavior: "smooth" })
-        }
+      <button
+        onClick={() => router.push("/myprofile")}
         className="hover:text-teal-500 transition"
       >
-        Explore
-      </button> */}
-
+        My Profile
+      </button>
       <button
         onClick={() => router.push("/myblogs")}
         className="hover:text-teal-500 transition"
       >
         My Blogs
       </button>
-
       <button onClick={handleLogout} className="hover:text-teal-500 transition">
         Log Out
       </button>
-
       {router.pathname !== "/writeblog" && (
         <button
           onClick={() => router.push("/writeblog")}
@@ -50,7 +41,6 @@ const DesktopNavbar = ({ router, handleLogout }) => (
   </header>
 );
 
-// -------------------- Mobile Sidebar --------------------
 const MobileSidebar = ({ router, handleLogout }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -66,38 +56,29 @@ const MobileSidebar = ({ router, handleLogout }) => {
 
   return (
     <>
-      {/* Hamburger button */}
       <button
         onClick={() => setIsOpen(true)}
         className="text-teal-700 focus:outline-none mt-4 bg-teal-100 p-2 rounded-3xl shadow-2xl sticky top-4 z-1000"
-
       >
         <Menu size={28} />
       </button>
-
-      {/* Sidebar */}
       {isOpen && (
         <div className="fixed inset-0 flex z-[2000]">
-          {/* Overlay */}
           <div
             className="fixed inset-0 bg-black/50 backdrop-blur-sm"
             onClick={() => setIsOpen(false)}
           />
-
-          {/* Sidebar Panel */}
           <div
-            className={`relative w-72 h-full bg-gradient-to-b from-white to-teal-50 shadow-2xl p-6 flex flex-col transition-transform duration-300 transform ${isOpen ? "translate-x-0" : "-translate-x-full"
-              }`}
+            className={`relative w-72 h-full bg-gradient-to-b from-white to-teal-50 shadow-2xl p-6 flex flex-col transition-transform duration-300 transform ${
+              isOpen ? "translate-x-0" : "-translate-x-full"
+            }`}
           >
-            {/* Close Button */}
             <button
               onClick={() => setIsOpen(false)}
               className="absolute top-4 right-4 text-gray-500 hover:text-teal-600 transition"
             >
               <X size={26} />
             </button>
-
-            {/* Logo */}
             <div className="flex items-center justify-center mt-10 mb-10">
               <img
                 src="https://res.cloudinary.com/da2imhgtf/image/upload/v1745956931/deawc3nxyaebfwnl1he8.png"
@@ -109,8 +90,15 @@ const MobileSidebar = ({ router, handleLogout }) => {
                 className="h-[75px] cursor-pointer hover:scale-105 transition-transform"
               />
             </div>
-
             <nav className="flex flex-col space-y-2">
+              <NavItem
+                icon={User}
+                label="My Profile"
+                onClick={() => {
+                  router.push("/myprofile");
+                  setIsOpen(false);
+                }}
+              />
               <NavItem
                 icon={BookOpen}
                 label="My Blogs"
@@ -127,7 +115,6 @@ const MobileSidebar = ({ router, handleLogout }) => {
                   setIsOpen(false);
                 }}
               />
-
               {router.pathname !== "/writeblog" && (
                 <button
                   onClick={() => {
@@ -140,7 +127,6 @@ const MobileSidebar = ({ router, handleLogout }) => {
                 </button>
               )}
             </nav>
-
             <div className="mt-auto pt-8 text-xs text-gray-500 border-t border-gray-200">
               © {new Date().getFullYear()} Blink & Blog. All rights reserved.
             </div>
@@ -151,12 +137,10 @@ const MobileSidebar = ({ router, handleLogout }) => {
   );
 };
 
-// -------------------- Header Wrapper --------------------
 const Header = () => {
   const router = useRouter();
   const [isMobile, setIsMobile] = useState(false);
 
-  // detect screen size
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     handleResize();

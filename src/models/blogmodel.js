@@ -6,6 +6,10 @@ const commentSchema = new Schema({
     type: String,
     required: true
   },
+  userId: {
+    type: String,
+    required: true
+  },
   author: {
     type: String,
     required: true
@@ -30,15 +34,15 @@ const blogSchema = new Schema({
     required: true,
   },
   media: {
-      url: {
-        type: String,
-        required: true,
-      },
-      type : {
-        type: String,
-        required: true,
-      }
+    url: {
+      type: String,
+      required: true,
     },
+    type: {
+      type: String,
+      required: true,
+    }
+  },
   comments: [commentSchema],
   createdAt: {
     type: Date,

@@ -12,6 +12,7 @@ const userSchema = new Schema(
     },
     image: { type: String }, // optional: save Google profile pic
     isGoogleUser: { type: Boolean, default: false }, // 👈 flag to know auth type
+    bio: { type: String, default: "" }, // optional: user bio
   },
   { timestamps: true }
 );

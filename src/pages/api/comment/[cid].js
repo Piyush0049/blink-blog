@@ -2,6 +2,8 @@ import connectToDatabase from '@/config/db';
 import Blog from '@/models/blogmodel';
 import jwt from "jsonwebtoken"
 import User from '@/models/usermodel';
+import cookie from 'cookie';
+import jwtDecode from 'jwt-decode';
 
 connectToDatabase();
 
@@ -14,21 +16,29 @@ export default async (req, res) => {
 
 
     try {
+        const cookies = cookie.parse(req.headers.cookie || '');
+        const tokenvalue = cookies.token;
         const blog = await Blog.findById(blogid);
 
         if (!blog) {
             return res.status(404).json({ message: 'Blog not found' });
         }
+        if (!tokenvalue) {
+            return res.status(401).json({ message: 'Unauthorized: No token provided' });
+        }
 
-        const decoded = jwt.verify(author, process.env.JWT_SECRET);
-
-        const userid = decoded.userId;
-
-        const user = await User.findById(userid);
+        let decoded;
+        try {
+            decoded = jwtDecode(tokenvalue);
+        } catch (err) {
+            return res.status(401).json({ message: 'Invalid token' });
+            }
+            const user = await User.findById(decoded.userId);
 
         const newComment = {
             text,
-            author : user.name,
+            userId: user._id,
+            author: user.name,
             createdAt: new Date()
         };
 
