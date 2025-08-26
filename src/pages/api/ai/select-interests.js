@@ -1,4 +1,3 @@
-// pages/api/ai/select-interests.js
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import interests from "../../../utils/interests";
 
@@ -15,8 +14,8 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Use smaller model for faster response
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5" });
+    // Use fast, supported model
+    const model = genAI.getGenerativeModel({ model: "gemini-1" });
 
     const prompt = `
 Suggest 3–5 interests based on this blog:
