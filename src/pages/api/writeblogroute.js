@@ -14,7 +14,7 @@ export default async function handler(req, res) {
   const tokenvalue = cookies.token;
   console.log(tokenvalue);
 
-  const { title, blogText, url, type } = req.body;
+  const { title, blogText, url, type, relatedTo } = req.body;
 
   const decoded = jwtDecode(tokenvalue);
   console.log(decoded);
@@ -32,6 +32,7 @@ export default async function handler(req, res) {
         url: url,
         type: type
       },
+      relatedTo : relatedTo
     });
 
     const savedBlog = await newBlog.save();

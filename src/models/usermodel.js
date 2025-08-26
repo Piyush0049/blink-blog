@@ -10,6 +10,11 @@ const userSchema = new Schema(
         return !this.isGoogleUser;
       },
     },
+    interests: {
+      type: [String],
+      required: true,
+      default: [],
+    },
     image: { type: String }, // optional: save Google profile pic
     isGoogleUser: { type: Boolean, default: false }, // 👈 flag to know auth type
     bio: { type: String, default: "" }, // optional: user bio

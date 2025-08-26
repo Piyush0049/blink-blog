@@ -1,10 +1,10 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Head from "next/head";
 import { useRouter } from "next/router";
 import CommentSection from "@/components/commentsection";
 import Header from "@/components/header";
+import { ChevronDown, ChevronUp, Tag } from "lucide-react";
 
 export default function BlogPage() {
   const route = useRouter();
@@ -12,7 +12,8 @@ export default function BlogPage() {
   const [blog, setBlog] = useState(null);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [currentUser, setCurrentUser] = useState(null); // logged-in user
+  const [currentUser, setCurrentUser] = useState(null);
+  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     const { id } = route.query;
@@ -20,19 +21,14 @@ export default function BlogPage() {
   }, [route.query]);
 
   useEffect(() => {
-    if (id) {
-      fetchBlog(id);
-    }
+    if (id) fetchBlog(id);
   }, [id]);
 
   useEffect(() => {
-    // Fetch current logged-in user
     const fetchCurrentUser = async () => {
       try {
         const res = await axios.get("/api/me");
-        if (res.status === 200) {
-          setCurrentUser(res.data.user);
-        }
+        if (res.status === 200) setCurrentUser(res.data.user);
       } catch (error) {
         console.log("Error fetching current user:", error);
       }
@@ -64,6 +60,12 @@ export default function BlogPage() {
     }
   };
 
+  // Split blog text into paragraphs
+  const paragraphs = blog?.blogText
+    ? blog.blogText.split(/\n\s*\n/).map((p) => p.trim())
+    : [];
+  const displayedParagraphs = expanded ? paragraphs : paragraphs.slice(0, 6);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-teal-50 to-white font-sans text-gray-800 relative overflow-hidden">
       {/* Floating Background Orbs */}
@@ -71,31 +73,22 @@ export default function BlogPage() {
       <div className="fixed bottom-20 right-10 w-72 h-72 bg-gradient-to-br from-sky-400 to-indigo-400 rounded-full opacity-20 blur-3xl animate-float-slower pointer-events-none" />
 
       <div className="max-w-6xl mx-auto sm:px-8 relative z-10">
-        {/* Header */}
         <Header />
 
         {/* Blog Content */}
         <main className="flex justify-center pt-6 sm:pt-8">
           {loading ? (
-            // ✨ Loader Section
+            // Loader
             <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-6">
               <div className="w-12 h-12 border-4 border-teal-400 border-t-transparent rounded-full animate-spin" />
               <p className="text-gray-500 animate-pulse">
                 Loading blog, please wait...
               </p>
-              {/* Skeleton preview */}
-              <div className="w-full max-w-2xl space-y-4 mt-6">
-                <div className="h-8 bg-gray-200 rounded-md animate-pulse" />
-                <div className="h-4 bg-gray-200 rounded-md w-1/3 animate-pulse" />
-                <div className="h-64 bg-gray-200 rounded-xl animate-pulse" />
-                <div className="h-4 bg-gray-200 rounded-md w-5/6 animate-pulse" />
-                <div className="h-4 bg-gray-200 rounded-md w-3/4 animate-pulse" />
-              </div>
             </div>
           ) : blog ? (
-            <article className="max-w-3xl w-full bg-white/80 backdrop-blur-md rounded-xl p-6 sm:p-10 border border-gray-100">
+            <article className="max-w-3xl w-full bg-white/95 backdrop-blur-md rounded-2xl p-6 sm:p-10 border border-gray-100 shadow-xl">
               {/* Title */}
-              <h1 className="text-[22px] sm:text-3xl font-extrabold text-gray-900 mb-4 leading-snug">
+              <h1 className="text-[24px] sm:text-3xl font-extrabold text-gray-900 mb-4 leading-snug">
                 {blog.title}
               </h1>
 
@@ -136,25 +129,63 @@ export default function BlogPage() {
                   loading="lazy"
                   draggable={false}
                 />
-              ) : (
+              ) : blog.media?.type === "video" ? (
                 <video
                   controls
                   className="w-full max-w-full rounded-2xl shadow-md mb-8 object-cover max-h-[420px]"
                 >
                   <source src={blog.media.url} type="video/mp4" />
                 </video>
-              )}
+              ) : null}
 
               {/* Blog Text */}
               <div className="prose prose-lg prose-teal max-w-none text-gray-800 leading-relaxed text-justify">
-                {blog.blogText
-                  .split(/\n\s*\n/) // split by double line breaks
-                  .map((para, idx) => (
-                    <p key={idx} className="mb-5">
-                      {para.trim()}
-                    </p>
-                  ))}
+                {displayedParagraphs.map((para, idx) => (
+                  <p key={idx} className="mb-5">
+                    {para}
+                  </p>
+                ))}
               </div>
+
+              {/* Read More / Show Less */}
+              {paragraphs.length > 6 && (
+                <div className="flex justify-center mt-6">
+                  <button
+                    onClick={() => setExpanded(!expanded)}
+                    className="flex items-center gap-1 text-teal-600 hover:text-teal-700 font-medium transition"
+                  >
+                    {expanded ? (
+                      <>
+                        Show Less <ChevronUp size={18} />
+                      </>
+                    ) : (
+                      <>
+                        Read More <ChevronDown size={18} />
+                      </>
+                    )}
+                  </button>
+                </div>
+              )}
+
+              {/* Tags */}
+              {blog.relatedTo?.length > 0 && (
+                <div className="mt-10 pt-6 border-t border-gray-200">
+                  <h3 className="flex items-center gap-2 text-sm font-semibold text-gray-600 mb-3">
+                    <Tag size={16} /> Related Topics
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {blog.relatedTo.map((tag, i) => (
+                      <span
+                        key={i}
+                        onClick={() => route.push(`/tag/${encodeURIComponent(tag)}`)}
+                        className="px-3 py-1 bg-gradient-to-r from-teal-100 to-cyan-100 text-teal-700 rounded-full text-sm font-medium shadow-sm hover:from-teal-200 hover:to-cyan-200 cursor-pointer transition"
+                      >
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
             </article>
           ) : (
             <p className="text-teal-600 text-center text-xl select-none">

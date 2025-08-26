@@ -43,6 +43,11 @@ const blogSchema = new Schema({
       required: true,
     }
   },
+  relatedTo: {
+    type: [String],
+    required: true,
+    default: [],
+  },
   comments: [commentSchema],
   createdAt: {
     type: Date,

@@ -18,7 +18,7 @@ export default async function handler(req, res) {
     const decoded = jwtDecode(tokenvalue);
     userId = decoded.userId;
 
-    // Handle GET request (fetch user details)
+    // ✅ GET → fetch profile
     if (req.method === 'GET') {
       const user = await User.findById(userId).select('-password');
       if (!user) {
@@ -27,13 +27,19 @@ export default async function handler(req, res) {
       return res.status(200).json({ message: 'User Found!', user });
     }
 
-    // Handle PUT request (update user details)
+    // ✅ PUT → update profile (including interests)
     if (req.method === 'PUT') {
-      const { name, email, image } = req.body; // you can add more fields here
+      const { name, email, image, bio, interests } = req.body;
 
       const updatedUser = await User.findByIdAndUpdate(
         userId,
-        { name, email, image }, // update only passed fields
+        {
+          ...(name !== undefined && { name }),
+          ...(email !== undefined && { email }),
+          ...(image !== undefined && { image }),
+          ...(bio !== undefined && { bio }),
+          ...(interests !== undefined && { interests }), // ✅ interests update
+        },
         { new: true, runValidators: true, select: '-password' }
       );
 
@@ -47,7 +53,7 @@ export default async function handler(req, res) {
       });
     }
 
-    // If method not allowed
+    // ❌ Method not allowed
     return res.status(405).json({ message: 'Method Not Allowed' });
 
   } catch (err) {

@@ -5,6 +5,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Toaster, toast } from "react-hot-toast";
 import Header from "@/components/header";
+import interests from "@/utils/interests";
 import Head from "next/head";
 import {
   Wand2, Save, Image as ImageIcon, Video, Type, Settings,
@@ -36,10 +37,14 @@ export default function WriteBlog() {
   const [mediaType, setMediaType] = useState("image");
   const [aiPrompt, setAiPrompt] = useState("");
   const [tone, setTone] = useState("professional");
-  const [words, setWords] = useState(700);
+  const [words, setWords] = useState(350);
   const [loadingAI, setLoadingAI] = useState(false);
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
+
+  // NEW: Interests
+  const [interestMode, setInterestMode] = useState("ai"); // "manual" | "ai"
+  const [selectedInterests, setSelectedInterests] = useState([]);
 
   const fileInputRef = useRef(null);
 
@@ -68,32 +73,54 @@ export default function WriteBlog() {
 
   const savePost = async (e) => {
     e.preventDefault();
+
+    if (saving) return; // 🚀 prevent double submit right away
+    setSaving(true);
+
     if (!title || !blogText) {
       toast.error("Title and content are required");
+      setSaving(false);
       return;
     }
-    setSaving(true);
+
+    let finalInterests = selectedInterests;
+
+    if (interestMode === "ai") {
+      try {
+        const res = await axios.post("/api/ai/select-interests", {
+          title,
+          content: blogText,
+        });
+        console.log(res)
+        finalInterests = res.data.interests || [];
+      } catch (err) {
+        toast.error("AI failed to suggest interests, please try manual.");
+        setSaving(false);
+        return;
+      }
+    }
+
     try {
       const res = await axios.post("/api/writeblogroute", {
         title,
         blogText,
         url: mediaUrl || undefined,
         type: mediaUrl ? mediaType : undefined,
+        relatedTo: finalInterests,
       });
       if (res.status === 201) {
-        toast.success("Blog published", {
-          autoClose: 3000, // 3 seconds
-        });
+        toast.success("Blog published 🎉", { autoClose: 3000 });
         setTimeout(() => router.push(`/blog/${res.data._id}`), 600);
       } else {
         toast.error("Failed to publish");
+        setSaving(false);
       }
     } catch (err) {
       toast.error(err?.response?.data?.message || "Error saving blog");
-    } finally {
       setSaving(false);
     }
   };
+
 
   const handlePickFile = () => fileInputRef.current?.click();
 
@@ -136,20 +163,23 @@ export default function WriteBlog() {
     }
   };
 
+  // handle manual interest selection
+  const toggleInterest = (interest) => {
+    setSelectedInterests((prev) =>
+      prev.includes(interest)
+        ? prev.filter((i) => i !== interest)
+        : [...prev, interest]
+    );
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-teal-50 to-cyan-50 text-gray-800 relative font-[Poppins]">
       <Toaster position="top-right" />
-
-      {/* background accents */}
-      <div className="pointer-events-none fixed -top-24 -left-16 w-96 h-96 rounded-full bg-gradient-to-br from-teal-200 to-cyan-300 opacity-20 blur-3xl" />
-      <div className="pointer-events-none fixed -bottom-24 -right-16 w-[32rem] h-[32rem] rounded-full bg-gradient-to-br from-sky-300 to-indigo-300 opacity-20 blur-3xl" />
-
-      {/* Header */}
       <Header />
 
-      {/* Editor Layout */}
       <main className="max-w-7xl mx-auto px-4 md:px-8 py-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Left: AI Composer */}
+        {/* AI Composer (unchanged) */}
+        {/* ... keep your AI section same ... */}
         <section className="lg:col-span-1 bg-white/80 backdrop-blur-xl rounded-2xl border border-white/60 shadow-md p-5 will-change-transform transition-all">
           <div className="flex items-center gap-2 mb-4">
             <Wand2 className="text-teal-600" />
@@ -205,11 +235,10 @@ export default function WriteBlog() {
             {loadingAI ? "Generating..." : "Generate Draft"}
           </button>
         </section>
-
         {/* Middle: Editor */}
         <section className="lg:col-span-2 space-y-6">
           {/* Title */}
-          <div className="bg-white/80 backdrop-blur-xl rounded-2xl border border-white/60 shadow-md p-5">
+          <div className="bg-white/80 backdrop-blur-xl rounded-2xl p-5">
             <label className="block text-sm text-gray-600 mb-1">Title</label>
             <div className="flex items-center gap-2">
               <Type className="text-teal-600" />
@@ -217,12 +246,53 @@ export default function WriteBlog() {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="An engaging headline..."
-                className="flex-1 border-b border-gray-200 focus:border-teal-400 outline-none py-2 bg-transparent text-lg"
+                className="flex-1 border-b border-gray-200 focus:border-teal-400 outline-none py-2 bg-transparent text-lg w-full"
               />
             </div>
           </div>
 
-          {/* Media */}
+          {/* Interests */}
+          <div className="bg-white/80 backdrop-blur-xl rounded-2xl p-5">
+            <h3 className="text-sm font-semibold text-teal-700 mb-2">Select Interests</h3>
+            <div className="flex gap-4 mb-4">
+              <label className="flex items-center gap-2 text-sm">
+                <input
+                  type="radio"
+                  checked={interestMode === "manual"}
+                  onChange={() => setInterestMode("manual")}
+                />
+                Manual
+              </label>
+              <label className="flex items-center gap-2 text-sm">
+                <input
+                  type="radio"
+                  checked={interestMode === "ai"}
+                  onChange={() => setInterestMode("ai")}
+                />
+                Let AI Decide
+              </label>
+            </div>
+
+            {interestMode === "manual" ? (
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-2 max-h-48 overflow-y-auto">
+                {interests.map((interest) => (
+                  <button
+                    key={interest}
+                    type="button"
+                    onClick={() => toggleInterest(interest)}
+                    className={`px-3 py-2 rounded-lg text-xs border ${selectedInterests.includes(interest)
+                      ? "bg-teal-500 text-white border-teal-600"
+                      : "border-gray-200 hover:bg-teal-50"
+                      }`}
+                  >
+                    {interest}
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <p className="text-xs text-gray-500">AI will suggest interests when you publish 🚀</p>
+            )}
+          </div>
           <div className="bg-white/80 backdrop-blur-xl rounded-2xl border border-white/60 shadow-md p-5">
             <div className="flex items-center justify-between mb-3">
               <label className="text-sm text-gray-600">Cover Media (optional)</label>
@@ -295,8 +365,9 @@ export default function WriteBlog() {
               value={blogText}
               onChange={(e) => setBlogText(e.target.value)}
               placeholder="Start writing your story..."
-              className="w-full min-h-[320px] border border-gray-200 focus:border-teal-300 focus:ring-2 focus:ring-teal-100 rounded-xl p-3 outline-none text-sm leading-7"
+              className="w-full min-h-[320px] border border-gray-200 focus:border-teal-300 focus:ring-2 focus:ring-teal-100 rounded-xl p-3 outline-none text-sm leading-7 text-justify"
             />
+
             <div className="mt-2 text-xs text-gray-500">{blogText.length} characters</div>
           </div>
 
@@ -338,18 +409,11 @@ export default function WriteBlog() {
               {saving ? <Loader2 className="animate-spin w-4 h-4" /> : <Save className="w-4 h-4" />}
               {saving ? "Publishing..." : "Publish Blog"}
             </button>
+
           </div>
+          {/* ... keep rest same: media, content, preview, publish button ... */}
         </section>
       </main>
-
-      {/* Page Animations */}
-      <style jsx global>{`
-        .animate-in { animation: fadeInUp .6s ease both; }
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(10px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
     </div>
   );
 }
