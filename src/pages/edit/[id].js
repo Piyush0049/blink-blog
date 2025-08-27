@@ -242,7 +242,7 @@ export default function EditBlogPage() {
           <div className="flex justify-between items-center pt-4">
             <button
               type="button"
-              onClick={() => router.push("/blogs")}
+              onClick={() => router.push("/myblogs")}
               className="inline-flex items-center gap-2 rounded-full px-4 md:px-5 py-2 bg-gray-100 text-gray-600 font-medium hover:bg-gray-200 transition"
             >
               <X size={16} />

@@ -22,7 +22,6 @@ export default function Home() {
     try {
       // ✅ Fetch user details (interests)
       const userRes = await axios.get("/api/me");
-      console.log("User details:", userRes.data);
       const interests = userRes?.data?.user?.interests || [];
       setUserInterests(interests);
 
@@ -33,8 +32,8 @@ export default function Home() {
 
         // ✅ Sort: interest blogs first, then latest
         const sortedBlogs = allBlogs.sort((a, b) => {
-          const aInterest = interests.includes(a.category) ? 1 : 0;
-          const bInterest = interests.includes(b.category) ? 1 : 0;
+          const aInterest = a.tags?.some((tag) => interests.includes(tag)) ? 1 : 0;
+          const bInterest = b.tags?.some((tag) => interests.includes(tag)) ? 1 : 0;
 
           if (aInterest !== bInterest) return bInterest - aInterest;
           return new Date(b.createdAt) - new Date(a.createdAt);
@@ -47,9 +46,9 @@ export default function Home() {
     }
   };
 
-  // ✅ Filter blogs based on interests only
+  // ✅ Filter blogs based on interests (arrays intersect)
   const interestBlogs = blogs.filter((blog) =>
-    userInterests.includes(blog.category)
+    blog.tags?.some((tag) => userInterests.includes(tag))
   );
 
   return (
@@ -69,8 +68,14 @@ export default function Home() {
           icon={<Star className="text-teal-500" />}
           title="Featured Blogs"
           gradient="from-teal-500 to-teal-400"
+          borderGradient="from-teal-300 to-teal-200"
         />
-        <BlogGrid blogs={blogs.slice(0, 3)} router={router} tag="Featured" userInterests={userInterests} />
+        <BlogGrid
+          blogs={blogs.slice(0, 3)}
+          router={router}
+          tag="Featured"
+          userInterests={userInterests}
+        />
 
         {/* Recommended Blogs (User Interests) */}
         {interestBlogs.length > 0 && (
@@ -79,6 +84,7 @@ export default function Home() {
               icon={<Heart className="text-rose-500" />}
               title="Recommended For You"
               gradient="from-rose-500 to-pink-400"
+              borderGradient="from-rose-300 to-pink-200"
             />
             <BlogGrid
               blogs={interestBlogs.slice(0, 6)}
@@ -94,8 +100,14 @@ export default function Home() {
           icon={<Clock className="text-sky-500" />}
           title="Latest Blogs"
           gradient="from-sky-500 to-cyan-400"
+          borderGradient="from-sky-300 to-cyan-200"
         />
-        <BlogGrid blogs={blogs.slice(0, 6)} router={router} tag="Latest" userInterests={userInterests}/>
+        <BlogGrid
+          blogs={blogs.slice(0, 6)}
+          router={router}
+          tag="Latest"
+          userInterests={userInterests}
+        />
       </div>
 
       {/* Floating Animations */}
