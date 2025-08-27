@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Star, Heart, Clock } from "lucide-react";
-
+import SectionLoader from "@/components/home/SectionLoader";
 import Header from "@/components/header";
 import HeroSection from "@/components/home/HeroSection";
 import SectionHeader from "@/components/home/SectionHeader";
@@ -64,20 +64,27 @@ export default function Home() {
         <HeroSection router={router} />
 
         {/* Featured Blogs */}
+        {/* Featured Blogs */}
         <SectionHeader
           icon={<Star className="text-teal-500" />}
           title="Featured Blogs"
           gradient="from-teal-500 to-teal-400"
           borderGradient="from-teal-300 to-teal-200"
         />
-        <BlogGrid
-          blogs={blogs.slice(0, 3)}
-          router={router}
-          tag="Featured"
-          userInterests={userInterests}
-        />
+        {blogs.length === 0 ? (
+          <SectionLoader />
+        ) : (
+          <BlogGrid
+            blogs={blogs.slice(0, 3)}
+            router={router}
+            tag="Featured"
+            userInterests={userInterests}
+          />
+        )}
+
 
         {/* Recommended Blogs (User Interests) */}
+        {/* Recommended Blogs */}
         {interestBlogs.length > 0 && (
           <>
             <SectionHeader
@@ -86,15 +93,21 @@ export default function Home() {
               gradient="from-rose-500 to-pink-400"
               borderGradient="from-rose-300 to-pink-200"
             />
-            <BlogGrid
-              blogs={interestBlogs.slice(0, 6)}
-              router={router}
-              tag="Recommended"
-              userInterests={userInterests}
-            />
+            {blogs.length === 0 ? (
+              <SectionLoader />
+            ) : (
+              <BlogGrid
+                blogs={interestBlogs.slice(0, 6)}
+                router={router}
+                tag="Recommended"
+                userInterests={userInterests}
+              />
+            )}
           </>
         )}
 
+
+        {/* Latest Blogs */}
         {/* Latest Blogs */}
         <SectionHeader
           icon={<Clock className="text-sky-500" />}
@@ -102,12 +115,17 @@ export default function Home() {
           gradient="from-sky-500 to-cyan-400"
           borderGradient="from-sky-300 to-cyan-200"
         />
-        <BlogGrid
-          blogs={blogs.slice(0, 6)}
-          router={router}
-          tag="Latest"
-          userInterests={userInterests}
-        />
+        {blogs.length === 0 ? (
+          <SectionLoader />
+        ) : (
+          <BlogGrid
+            blogs={blogs.slice(0, 6)}
+            router={router}
+            tag="Latest"
+            userInterests={userInterests}
+          />
+        )}
+
       </div>
 
       {/* Floating Animations */}

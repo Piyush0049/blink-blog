@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function BlogGrid({ blogs, router, tag, userInterests = [] }) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-20">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-20">
       {blogs.map((blog, index) => {
         // ✅ Check if any blog tag matches user interests
         const isRecommended =
