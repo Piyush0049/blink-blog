@@ -9,9 +9,17 @@ export default async function handler(req, res) {
   }
 
   try {
-    const blogs = await Blog.find();
+    const blogs = await Blog.find().sort({ createdAt: -1 });
 
-    return res.status(200).json({ blogs });
+    // map relatedTo -> tags for frontend
+    const formattedBlogs = blogs.map(blog => ({
+      ...blog._doc,
+      tags: blog.relatedTo,
+    }));
+
+    return res.status(200).json({ blogs: formattedBlogs });
+
+
   } catch (error) {
     console.error('Error fetching blogs:', error);
     return res.status(500).json({ message: 'Internal server error' });
