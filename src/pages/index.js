@@ -15,14 +15,11 @@ export default function Home() {
           "url('https://res.cloudinary.com/da2imhgtf/image/upload/v1717421094/hbee6ankimbppxkoojl4.jpg')",
       }}
     >
-      {/* Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/80 z-0 backdrop-blur-[1.5px]" />
 
-      {/* Accent blobs */}
       <div className="absolute top-20 left-4 sm:left-10 w-36 h-36 sm:w-56 sm:h-56 bg-teal-400/30 rounded-full blur-3xl animate-float-slow" />
       <div className="absolute bottom-20 right-4 sm:right-10 w-56 h-56 sm:w-80 sm:h-80 bg-sky-500/25 rounded-full blur-3xl animate-float-slower" />
 
-      {/* Hero Panel */}
       <div className="relative z-10 w-full max-w-3xl px-6 sm:px-10 py-12 sm:py-16 text-center space-y-8 sm:space-y-10 rounded-3xl border border-white/20 backdrop-blur-sm shadow-xl animate-fadeIn">
         <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-200 via-cyan-100 to-sky-400 tracking-tight leading-tight animate-float-up drop-shadow">
           Blink &amp; Blog
