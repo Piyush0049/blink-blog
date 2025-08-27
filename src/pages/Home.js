@@ -22,7 +22,8 @@ export default function Home() {
     try {
       // ✅ Fetch user details (interests)
       const userRes = await axios.get("/api/me");
-      const interests = userRes?.data?.interests || [];
+      console.log("User details:", userRes.data);
+      const interests = userRes?.data?.user?.interests || [];
       setUserInterests(interests);
 
       // ✅ Fetch blogs
@@ -69,7 +70,7 @@ export default function Home() {
           title="Featured Blogs"
           gradient="from-teal-500 to-teal-400"
         />
-        <BlogGrid blogs={blogs.slice(0, 3)} router={router} tag="Featured" />
+        <BlogGrid blogs={blogs.slice(0, 3)} router={router} tag="Featured" userInterests={userInterests} />
 
         {/* Recommended Blogs (User Interests) */}
         {interestBlogs.length > 0 && (
@@ -83,6 +84,7 @@ export default function Home() {
               blogs={interestBlogs.slice(0, 6)}
               router={router}
               tag="Recommended"
+              userInterests={userInterests}
             />
           </>
         )}
@@ -93,7 +95,7 @@ export default function Home() {
           title="Latest Blogs"
           gradient="from-sky-500 to-cyan-400"
         />
-        <BlogGrid blogs={blogs.slice(0, 6)} router={router} tag="Latest" />
+        <BlogGrid blogs={blogs.slice(0, 6)} router={router} tag="Latest" userInterests={userInterests}/>
       </div>
 
       {/* Floating Animations */}

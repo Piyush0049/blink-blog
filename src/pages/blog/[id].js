@@ -86,7 +86,7 @@ export default function BlogPage() {
               </p>
             </div>
           ) : blog ? (
-            <article className="max-w-3xl w-full bg-white/95 backdrop-blur-md rounded-2xl p-6 sm:p-10 border border-gray-100 shadow-xl">
+            <article className="max-w-3xl w-full bg-white/95 backdrop-blur-md rounded-2xl p-6 sm:p-10 border border-gray-100 ">
               {/* Title */}
               <h1 className="text-[24px] sm:text-3xl font-extrabold text-gray-900 mb-4 leading-snug">
                 {blog.title}
