@@ -34,6 +34,7 @@
     "react-dom": "^18",
     "react-firebase-hooks": "^5.1.1",
     "react-hot-toast": "^2.6.0",
+    "redis": "^5.8.2",
     "styled-components": "^6.1.11",
     "tailwindcss": "^4.1.12"
   },
