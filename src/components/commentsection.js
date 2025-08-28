@@ -115,7 +115,6 @@ const CommentSection = () => {
               key={idx}
               className="flex items-start gap-4 p-4 bg-white/80 backdrop-blur-md rounded-xl border border-gray-100 shadow hover:shadow-md hover:border-teal-200 transition"
             >
-              {/* Avatar */}
               {renderAvatar(commentItem.authorDetails)}
 
               <div className="flex-1">
