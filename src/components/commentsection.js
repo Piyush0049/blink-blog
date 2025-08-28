@@ -95,7 +95,6 @@ const CommentSection = () => {
 
   return (
     <section className="sm:p-6 max-w-3xl mx-auto">
-      {/* Title */}
       <h2
         className={`text-2xl sm:text-3xl font-bold text-gray-800 mb-6 text-center relative`}
       >
