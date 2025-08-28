@@ -118,7 +118,6 @@ const CommentSection = () => {
               {/* Avatar */}
               {renderAvatar(commentItem.authorDetails)}
 
-              {/* Content */}
               <div className="flex-1">
                 <div className="flex justify-between items-center mb-1">
                   <p
