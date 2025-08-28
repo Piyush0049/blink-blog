@@ -103,7 +103,6 @@ const CommentSection = () => {
         <span className="block w-16 h-1 bg-gradient-to-r from-teal-500 to-cyan-400 mx-auto mt-2 rounded-full" />
       </h2>
 
-      {/* Comments List */}
       <div className="space-y-5 max-h-80 overflow-y-auto px-2 scrollbar-thin scrollbar-thumb-teal-400 scrollbar-track-gray-100 hover:scrollbar-thumb-teal-500">
         {allComments.length === 0 ? (
           <p className="text-center text-gray-500 italic text-sm">
