@@ -49,7 +49,6 @@ export default function HeroSection({ router }) {
           like-minded community.
         </p>
 
-        {/* Features Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs sm:text-sm">
           <div className="flex items-center gap-2 text-gray-700">
             <Sparkles className="text-teal-500 w-4 h-4 sm:w-5 sm:h-5" />
