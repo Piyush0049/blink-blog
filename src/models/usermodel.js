@@ -16,7 +16,7 @@ const userSchema = new Schema(
       default: [],
     },
     image: { type: String },
-    isGoogleUser: { type: Boolean, default: false }, // 👈 flag to know auth type
+    isGoogleUser: { type: Boolean, default: false },
     bio: { type: String, default: "" }, // optional: user bio
   },
   { timestamps: true }
