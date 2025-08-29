@@ -17,7 +17,7 @@ const userSchema = new Schema(
     },
     image: { type: String },
     isGoogleUser: { type: Boolean, default: false },
-    bio: { type: String, default: "" }, // optional: user bio
+    bio: { type: String, default: "" },
   },
   { timestamps: true }
 );
