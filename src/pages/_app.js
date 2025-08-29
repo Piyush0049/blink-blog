@@ -37,7 +37,6 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
     <SessionProvider session={session}>
       <Toaster position="top-right" reverseOrder={false} />
 
-      {/* Loader Overlay */}
       {loading && (
         <div className="fixed inset-0 bg-white bg-opacity-70 flex items-center justify-center z-50">
           <div className="w-12 h-12 border-4 border-teal-500 border-t-transparent rounded-full animate-spin"></div>
