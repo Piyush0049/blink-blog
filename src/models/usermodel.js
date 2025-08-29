@@ -15,7 +15,7 @@ const userSchema = new Schema(
       required: true,
       default: [],
     },
-    image: { type: String }, // optional: save Google profile pic
+    image: { type: String },
     isGoogleUser: { type: Boolean, default: false }, // 👈 flag to know auth type
     bio: { type: String, default: "" }, // optional: user bio
   },
