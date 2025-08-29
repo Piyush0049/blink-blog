@@ -5,7 +5,6 @@ import { PenTool, Users, Shield, Sparkles } from "lucide-react";
 export default function HeroSection({ router }) {
   return (
     <main className="flex flex-col lg:flex-row gap-8 mb-16 mt-6 items-center">
-      {/* Hero Image with Overlay */}
       <div className="flex-1 relative rounded-2xl overflow-hidden group shadow-xl">
         <img
           src="https://res.cloudinary.com/da2imhgtf/image/upload/v1717421094/hbee6ankimbppxkoojl4.jpg"
