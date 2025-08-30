@@ -24,10 +24,10 @@ export default function LoginPage() {
         toast.success("Login successful! 🎉");
         router.push("/Home");
       } else {
-        toast.error("Login failed, please try again."); // ❌ error toast
+        toast.error("Login failed, please try again.");
       }
     } catch {
-      toast.error("An error occurred. Please try again."); // ❌ error toast
+      toast.error("An error occurred. Please try again.");
     }
   };
 
