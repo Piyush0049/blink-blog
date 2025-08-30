@@ -33,7 +33,6 @@ export default function LoginPage() {
 
   const handleGoogleLogin = () => {
     toast.loading("Redirecting to Google...");
-    // let NextAuth do the redirect to Google
     signIn("google", {
       callbackUrl: `${window.location.origin}/Home`,
       redirect: true, // ensure default redirect behavior
