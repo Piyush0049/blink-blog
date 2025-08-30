@@ -105,10 +105,6 @@ export default function Home() {
             )}
           </>
         )}
-
-
-        {/* Latest Blogs */}
-        {/* Latest Blogs */}
         <SectionHeader
           icon={<Clock className="text-sky-500" />}
           title="Latest Blogs"
