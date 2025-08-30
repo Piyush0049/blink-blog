@@ -35,7 +35,7 @@ export default function LoginPage() {
     toast.loading("Redirecting to Google...");
     signIn("google", {
       callbackUrl: `${window.location.origin}/Home`,
-      redirect: true, // ensure default redirect behavior
+      redirect: true,
     });
   };
 
