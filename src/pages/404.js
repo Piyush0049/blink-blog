@@ -12,10 +12,7 @@ export default function Custom404() {
         backgroundPosition: "center",
       }}
     >
-      {/* Overlay gradient */}
       <div className="absolute inset-0 bg-teal-900 bg-opacity-70 backdrop-blur-sm"></div>
-
-      {/* Content */}
       <div className="relative z-10 flex flex-col items-center">
         <h1 className="text-7xl sm:text-9xl font-extrabold text-teal-300 drop-shadow-lg">
           404
