@@ -7,7 +7,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import GoogleIcon from "@mui/icons-material/Google";
 import axios from "axios";
 import { signIn } from "next-auth/react";
-import toast from "react-hot-toast"; // 👈 import
+import toast from "react-hot-toast";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -21,7 +21,7 @@ export default function LoginPage() {
       console.log(res); 
       if (res.status === 200) {
         localStorage.setItem("token", res.data.user.token);
-        toast.success("Login successful! 🎉"); // ✅ success toast
+        toast.success("Login successful! 🎉");
         router.push("/Home");
       } else {
         toast.error("Login failed, please try again."); // ❌ error toast
