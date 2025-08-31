@@ -17,8 +17,6 @@ export default async function handler(req, res) {
   try {
     const decoded = jwtDecode(tokenvalue);
     userId = decoded.userId;
-
-    // ✅ GET → fetch profile
     if (req.method === 'GET') {
       const user = await User.findById(userId).select('-password');
       if (!user) {
