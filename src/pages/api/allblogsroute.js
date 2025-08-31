@@ -28,8 +28,6 @@ export default async function handler(req, res) {
 
   try {
     await connectRedis();
-
-    // 1. Try fetching from cache
     const cachedBlogs = await client.get("blogs");
     if (cachedBlogs) {
       return res.status(200).json({ blogs: JSON.parse(cachedBlogs), cache: true });
