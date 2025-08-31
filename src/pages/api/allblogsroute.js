@@ -34,8 +34,6 @@ export default async function handler(req, res) {
     if (cachedBlogs) {
       return res.status(200).json({ blogs: JSON.parse(cachedBlogs), cache: true });
     }
-
-    // 2. If not cached, fetch from MongoDB
     await connectToDatabase();
     const blogs = await Blog.find().sort({ createdAt: -1 });
 
