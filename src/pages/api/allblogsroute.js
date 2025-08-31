@@ -43,8 +43,6 @@ export default async function handler(req, res) {
       ...blog._doc,
       tags: blog.relatedTo,
     }));
-
-    // 3. Store in Redis (with TTL, e.g. 1 hour)
     await client.setEx("blogs", 3600, JSON.stringify(formattedBlogs));
 
     return res.status(200).json({ blogs: formattedBlogs, cache: false });
