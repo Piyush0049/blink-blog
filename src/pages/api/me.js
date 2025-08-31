@@ -34,7 +34,7 @@ export default async function handler(req, res) {
           ...(email !== undefined && { email }),
           ...(image !== undefined && { image }),
           ...(bio !== undefined && { bio }),
-          ...(interests !== undefined && { interests }), // ✅ interests update
+          ...(interests !== undefined && { interests }),
         },
         { new: true, runValidators: true, select: '-password' }
       );
