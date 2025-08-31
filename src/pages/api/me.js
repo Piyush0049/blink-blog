@@ -24,8 +24,6 @@ export default async function handler(req, res) {
       }
       return res.status(200).json({ message: 'User Found!', user });
     }
-
-    // ✅ PUT → update profile (including interests)
     if (req.method === 'PUT') {
       const { name, email, image, bio, interests } = req.body;
 
