@@ -6,7 +6,6 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Clear the token cookie
     res.setHeader(
       "Set-Cookie",
       cookie.serialize("token", "", {
