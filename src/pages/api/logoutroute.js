@@ -13,7 +13,7 @@ export default async function handler(req, res) {
         secure: process.env.NODE_ENV === "production",
         sameSite: "strict",
         path: "/",
-        expires: new Date(0), // immediately expires
+        expires: new Date(0),
       })
     );
 
