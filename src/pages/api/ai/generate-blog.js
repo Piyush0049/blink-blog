@@ -69,7 +69,6 @@ Topic: ${prompt || '(none provided)'}
 Write the full article as plain paragraphs.
 `;
 
-    // ✅ FIX: Gemini expects just { text: "..." }, not role/parts
     const result = await model.generateContent([
       { text: system + '\n\n' + user }
     ]);
