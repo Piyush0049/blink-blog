@@ -48,8 +48,6 @@ export default async function handler(req, res) {
         user: updatedUser,
       });
     }
-
-    // ❌ Method not allowed
     return res.status(405).json({ message: 'Method Not Allowed' });
 
   } catch (err) {
