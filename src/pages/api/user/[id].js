@@ -23,8 +23,6 @@ export default async function handler(req, res) {
       } catch (err) {
         return res.status(401).json({ message: 'Invalid token' });
       }
-
-      // ✅ Fetch public profile details only
       const otherUser = await User.findById(id).select("_id name image bio interests createdAt");
 
       if (!otherUser) {
