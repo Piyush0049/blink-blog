@@ -27,7 +27,6 @@ export default async function handler(req, res) {
   }
 
   switch (method) {
-    // ✅ Fetch blog
     case "GET":
       try {
         const blog = await Blog.findById(id);
