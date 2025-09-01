@@ -66,7 +66,6 @@ export default async function handler(req, res) {
         return res.status(500).json({ message: "Server error" });
       }
 
-    // ✅ Delete blog
     case "DELETE":
       try {
         const blog = await Blog.findById(id);
