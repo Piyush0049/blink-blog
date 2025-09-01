@@ -42,7 +42,6 @@ export default async function handler(req, res) {
         return res.status(500).json({ error: "Internal Server Error" });
       }
 
-    // ✅ Update blog
     case "PUT":
       try {
         const { title, blogText, url, type } = req.body;
