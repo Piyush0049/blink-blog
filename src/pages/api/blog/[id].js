@@ -11,7 +11,6 @@ export default async function handler(req, res) {
     method,
   } = req;
 
-  // ✅ Authenticate user
   const cookies = cookie.parse(req.headers.cookie || '');
   const tokenvalue = cookies.token;
 
