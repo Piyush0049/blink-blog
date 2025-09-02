@@ -74,7 +74,6 @@ export default function BlogPage() {
         <Header />
         <main className="flex justify-center pt-6 sm:pt-8">
           {loading ? (
-            // Loader
             <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-6">
               <div className="w-12 h-12 border-4 border-teal-400 border-t-transparent rounded-full animate-spin" />
               <p className="text-gray-500 animate-pulse">
