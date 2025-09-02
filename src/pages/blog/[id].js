@@ -85,8 +85,6 @@ export default function BlogPage() {
               <h1 className="text-[24px] sm:text-[26px] font-bold text-gray-800 mb-4 lading-snug">
                 {blog.title}
               </h1>
-
-              {/* Author Card */}
               <div
                 onClick={handleAuthorClick}
                 className="flex items-center gap-4 mb-6 sm:mb-10 cursor-pointer hover:bg-gray-50 p-2 rounded-xl transition"
