@@ -60,7 +60,6 @@ export default function BlogPage() {
     }
   };
 
-  // Split blog text into paragraphs
   const paragraphs = blog?.blogText
     ? blog.blogText.split(/\n\s*\n/).map((p) => p.trim())
     : [];
