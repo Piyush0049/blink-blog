@@ -82,7 +82,6 @@ export default function BlogPage() {
             </div>
           ) : blog ? (
             <article className="max-w-3xl w-full bg-white/95 backdrop-blur-md rounded-2xl p-6 sm:p-10 border border-gray-100 ">
-              {/* Title */}
               <h1 className="text-[24px] sm:text-[26px] font-bold text-gray-800 mb-4 lading-snug">
                 {blog.title}
               </h1>
