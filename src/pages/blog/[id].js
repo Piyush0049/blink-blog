@@ -72,8 +72,6 @@ export default function BlogPage() {
 
       <div className="max-w-6xl mx-auto sm:px-8 relative z-10">
         <Header />
-
-        {/* Blog Content */}
         <main className="flex justify-center pt-6 sm:pt-8">
           {loading ? (
             // Loader
