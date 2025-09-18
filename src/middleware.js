@@ -37,8 +37,6 @@ export async function middleware(req) {
   if (publicRoutes.includes(pathname)) {
     return NextResponse.next();
   }
-
-  // not logged in and trying to visit protected route → redirect to /login
   url.pathname = "/login";
   return NextResponse.redirect(url);
 }
