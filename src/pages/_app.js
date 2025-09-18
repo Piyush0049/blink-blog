@@ -9,7 +9,6 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
   const router = useRouter();
 
   useEffect(() => {
-    // Route change loading
     const handleStart = () => setLoading(true);
     const handleComplete = () => setLoading(false);
 
