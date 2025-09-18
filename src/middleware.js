@@ -1,4 +1,3 @@
-// middleware.js
 import { NextResponse } from "next/server";
 import { jwtVerify } from "jose";
 
@@ -8,7 +7,6 @@ export async function middleware(req) {
 
   const publicRoutes = ["/", "/login", "/signup"];
 
-  // ✅ allow ALL API routes through (skip middleware for them)
   if (pathname.startsWith("/api/")) {
     return NextResponse.next();
   }
