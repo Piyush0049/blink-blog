@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
 export default function App({ Component, pageProps: { session, ...pageProps } }) {
-  const [loading, setLoading] = useState(true); // start as true for initial load
+  const [loading, setLoading] = useState(true); 
   const router = useRouter();
 
   useEffect(() => {
