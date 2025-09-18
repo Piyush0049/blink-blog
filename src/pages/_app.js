@@ -16,7 +16,6 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
     router.events.on("routeChangeComplete", handleComplete);
     router.events.on("routeChangeError", handleComplete);
 
-    // Handle browser reload (F5 / Cmd+R)
     const handlePageLoad = () => setLoading(false);
     if (document.readyState === "complete") {
       setLoading(false);
