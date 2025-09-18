@@ -27,7 +27,6 @@ export async function middleware(req) {
   }
 
   if (authOk) {
-    // if logged in and visiting public route → redirect to /Home
     if (publicRoutes.includes(pathname)) {
       url.pathname = "/Home";
       return NextResponse.redirect(url);
