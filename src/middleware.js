@@ -34,7 +34,6 @@ export async function middleware(req) {
     return NextResponse.next();
   }
 
-  // not logged in but visiting public route → allow
   if (publicRoutes.includes(pathname)) {
     return NextResponse.next();
   }
