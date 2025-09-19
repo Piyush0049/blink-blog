@@ -43,7 +43,6 @@ export default function Home() {
     }
   };
 
-  // ✅ Filter blogs based on interests (arrays intersect)
   const interestBlogs = blogs.filter((blog) =>
     blog.tags?.some((tag) => userInterests.includes(tag))
   );
