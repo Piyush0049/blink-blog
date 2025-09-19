@@ -24,7 +24,6 @@ export default function Home() {
       const interests = userRes?.data?.user?.interests || [];
       setUserInterests(interests);
 
-      // ✅ Fetch blogs
       const blogRes = await axios.get("/api/allblogsroute");
       if (blogRes.status === 200) {
         const allBlogs = blogRes.data.blogs;
