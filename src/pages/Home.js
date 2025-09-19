@@ -109,8 +109,6 @@ export default function Home() {
         )}
 
       </div>
-
-      {/* Floating Animations */}
       <style jsx>{`
         @keyframes floatSlow {
           0%, 100% { transform: translateY(0) translateX(0); }
