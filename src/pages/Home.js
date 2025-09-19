@@ -54,8 +54,6 @@ export default function Home() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
         <Header />
-
-        {/* Hero */}
         <HeroSection router={router} />
         <SectionHeader
           icon={<Star className="text-teal-500" />}
