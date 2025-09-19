@@ -57,9 +57,6 @@ export default function Home() {
 
         {/* Hero */}
         <HeroSection router={router} />
-
-        {/* Featured Blogs */}
-        {/* Featured Blogs */}
         <SectionHeader
           icon={<Star className="text-teal-500" />}
           title="Featured Blogs"
