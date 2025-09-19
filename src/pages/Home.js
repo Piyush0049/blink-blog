@@ -28,7 +28,6 @@ export default function Home() {
       if (blogRes.status === 200) {
         const allBlogs = blogRes.data.blogs;
 
-        // ✅ Sort: interest blogs first, then latest
         const sortedBlogs = allBlogs.sort((a, b) => {
           const aInterest = a.tags?.some((tag) => interests.includes(tag)) ? 1 : 0;
           const bInterest = b.tags?.some((tag) => interests.includes(tag)) ? 1 : 0;
