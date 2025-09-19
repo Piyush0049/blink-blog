@@ -71,10 +71,6 @@ export default function Home() {
             userInterests={userInterests}
           />
         )}
-
-
-        {/* Recommended Blogs (User Interests) */}
-        {/* Recommended Blogs */}
         {interestBlogs.length > 0 && (
           <>
             <SectionHeader
