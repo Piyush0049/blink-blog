@@ -20,7 +20,6 @@ export default function Home() {
 
   const fetchBlogs = async () => {
     try {
-      // ✅ Fetch user details (interests)
       const userRes = await axios.get("/api/me");
       const interests = userRes?.data?.user?.interests || [];
       setUserInterests(interests);
