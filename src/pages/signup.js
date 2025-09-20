@@ -53,7 +53,6 @@ export default function Signuppage() {
 
   return (
     <div className="relative flex flex-col items-center justify-center h-screen font-[Poppins] bg-black/70">
-      {/* Background blurred image */}
       <div
         className="absolute top-0 left-0 w-full h-full bg-cover bg-center opacity-50 blur-sm -z-10"
         style={{
