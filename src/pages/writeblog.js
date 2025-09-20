@@ -160,7 +160,6 @@ export default function WriteBlog() {
     }
   };
 
-  // handle manual interest selection
   const toggleInterest = (interest) => {
     setSelectedInterests((prev) =>
       prev.includes(interest)
