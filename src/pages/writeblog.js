@@ -1,4 +1,3 @@
-// pages/writeblog.js
 "use client";
 import React, { useState, useRef } from "react";
 import axios from "axios";
@@ -6,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { Toaster, toast } from "react-hot-toast";
 import Header from "@/components/header";
 import interests from "@/utils/interests";
-import Head from "next/head";
 import {
   Wand2, Save, Image as ImageIcon, Video, Type, Settings,
   Loader2, UploadCloud
