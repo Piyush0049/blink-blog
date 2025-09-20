@@ -40,8 +40,7 @@ export default function WriteBlog() {
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
 
-  // NEW: Interests
-  const [interestMode, setInterestMode] = useState("ai"); // "manual" | "ai"
+  const [interestMode, setInterestMode] = useState("ai");
   const [selectedInterests, setSelectedInterests] = useState([]);
 
   const fileInputRef = useRef(null);
