@@ -20,7 +20,6 @@ export default function Signuppage() {
   const [showPassword, setShowPassword] = useState(false);
   const [showcPassword, setShowcPassword] = useState(false);
 
-  // ✅ Normal signup with email/password
   const signup = async (e) => {
     e.preventDefault();
     if (user.password !== user.cpassword) {
