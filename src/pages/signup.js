@@ -46,7 +46,6 @@ export default function Signuppage() {
     }
   };
 
-  // ✅ Google signup
   const handleGoogleSignup = () => {
     toast.loading("Redirecting to Google... ⏳");
     signIn("google", { callbackUrl: "/Home" });
