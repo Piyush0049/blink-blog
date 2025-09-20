@@ -174,8 +174,6 @@ export default function WriteBlog() {
       <Header />
 
       <main className="max-w-7xl mx-auto px-4 md:px-8 py-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* AI Composer (unchanged) */}
-        {/* ... keep your AI section same ... */}
         <section className="lg:col-span-1 bg-white/80 backdrop-blur-xl rounded-2xl border border-white/60 shadow-md p-5 will-change-transform transition-all">
           <div className="flex items-center gap-2 mb-4">
             <Wand2 className="text-teal-600" />
