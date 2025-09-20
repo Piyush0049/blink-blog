@@ -7,7 +7,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import GoogleIcon from "@mui/icons-material/Google";
 import axios from "axios";
 import { signIn } from "next-auth/react";
-import toast from "react-hot-toast"; // 👈 import toast
+import toast from "react-hot-toast";
 
 export default function Signuppage() {
   const router = useRouter();
