@@ -71,7 +71,7 @@ export default function WriteBlog() {
   const savePost = async (e) => {
     e.preventDefault();
 
-    if (saving) return; // 🚀 prevent double submit right away
+    if (saving) return;
     setSaving(true);
 
     if (!title || !blogText) {
