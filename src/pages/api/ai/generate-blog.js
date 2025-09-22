@@ -10,7 +10,6 @@ function stripMarkdownToParagraphs(md) {
     .replace(/^>\s?/gm, '')
     .replace(/^(-{3,}|_{3,}|\*{3,})$/gm, '');
 
-  // remove list markers, keep text
   t = t.replace(/^\s{0,3}[-*+]\s+/gm, '')
     .replace(/^\s*\d+\.\s+/gm, '');
 
