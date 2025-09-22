@@ -6,7 +6,6 @@ function stripMarkdownToParagraphs(md) {
 
   t = t.replace(/```[\s\S]*?```/g, '');
 
-  // strip headings / blockquotes / horizontal rules
   t = t.replace(/^#{1,6}\s+/gm, '')
     .replace(/^>\s?/gm, '')
     .replace(/^(-{3,}|_{3,}|\*{3,})$/gm, '');
