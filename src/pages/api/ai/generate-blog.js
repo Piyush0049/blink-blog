@@ -1,6 +1,5 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
-// helper: strip markdown -> paragraphs
 function stripMarkdownToParagraphs(md) {
   if (!md) return '';
   let t = md;
