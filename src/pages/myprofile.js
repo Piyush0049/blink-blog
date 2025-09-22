@@ -13,7 +13,7 @@ export default function MyProfile() {
     email: "",
     bio: "",
     image: "",
-    interests: [], // ✅ new field
+    interests: [],
   });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
