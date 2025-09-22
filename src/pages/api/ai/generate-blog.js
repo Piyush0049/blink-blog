@@ -1,4 +1,3 @@
-// pages/api/ai/generate-blog.js
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 // helper: strip markdown -> paragraphs
