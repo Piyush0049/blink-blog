@@ -4,7 +4,6 @@ function stripMarkdownToParagraphs(md) {
   if (!md) return '';
   let t = md;
 
-  // remove code blocks
   t = t.replace(/```[\s\S]*?```/g, '');
 
   // strip headings / blockquotes / horizontal rules
