@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Save, User, Upload } from "lucide-react";
 import Header from "@/components/header";
 import toast from "react-hot-toast";
-import interestsList from "@/utils/interests"; // ✅ import list
+import interestsList from "@/utils/interests";
 
 export default function MyProfile() {
   const [user, setUser] = useState({
