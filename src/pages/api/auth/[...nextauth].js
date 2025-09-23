@@ -61,7 +61,6 @@ export default async function auth(req, res) {
             { expiresIn: "7d" }
           );
 
-          // ✅ Set HttpOnly cookie here
           res.setHeader("Set-Cookie", serialize("token", appToken, {
             httpOnly: true,
             maxAge: 7 * 24 * 60 * 60,
