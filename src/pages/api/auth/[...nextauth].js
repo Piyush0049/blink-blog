@@ -55,7 +55,6 @@ export default async function auth(req, res) {
         const allowed = await authOptions.callbacks.signIn({ user, account, profile });
         
         if (allowed) {
-          // Generate custom JWT
           const appToken = jwt.sign(
             { userId: user._id?.toString() },
             process.env.JWT_SECRET,
