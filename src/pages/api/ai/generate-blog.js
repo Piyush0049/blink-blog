@@ -18,7 +18,6 @@ function stripMarkdownToParagraphs(md) {
     .replace(/_{1,2}(.*?)_{1,2}/g, '$1')
     .replace(/`([^`]+)`/g, '$1');
 
-  // collapse blank lines
   t = t.replace(/\n{3,}/g, '\n\n').trim();
 
   return t.split(/\n{2,}/).map(s => s.trim()).filter(Boolean).join('\n\n');
