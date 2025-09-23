@@ -1,6 +1,5 @@
 // utils/interests.js
 const interests = [
-  // 🔹 Core Categories
   "Technology",
   "Business & Finance",
   "Education & Learning",
