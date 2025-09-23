@@ -13,7 +13,6 @@ function stripMarkdownToParagraphs(md) {
   t = t.replace(/^\s{0,3}[-*+]\s+/gm, '')
     .replace(/^\s*\d+\.\s+/gm, '');
 
-  // remove emphasis markers
   t = t.replace(/\*\*(.*?)\*\*/g, '$1')
     .replace(/\*(.*?)\*/g, '$1')
     .replace(/_{1,2}(.*?)_{1,2}/g, '$1')
