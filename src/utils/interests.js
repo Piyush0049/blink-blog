@@ -1,4 +1,3 @@
-// utils/interests.js
 const interests = [
   "Technology",
   "Business & Finance",
