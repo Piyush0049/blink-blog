@@ -1,25 +1,25 @@
 import connectToDatabase from '@/config/db';
 import Blog from '@/models/blogmodel';
-import { createClient } from "redis";
+// import { createClient } from "redis";
 
-const client = createClient({
-  url: process.env.REDIS_URL,
-  socket: {
-    tls: process.env.REDIS_URL.startsWith("rediss://"),
-    reconnectStrategy: (retries) => Math.min(retries * 50, 500),
-  },
-});
+// const client = createClient({
+//   url: process.env.REDIS_URL,
+//   socket: {
+//     tls: process.env.REDIS_URL.startsWith("rediss://"),
+//     reconnectStrategy: (retries) => Math.min(retries * 50, 500),
+//   },
+// });
 
-let redisConnected = false;
+// let redisConnected = false;
 
-async function connectRedis() {
-  if (!redisConnected) {
-    client.on("connect", () => console.log("✅ Redis connected"));
-    client.on("error", (err) => console.error("❌ Redis Error", err));
-    await client.connect();
-    redisConnected = true;
-  }
-}
+// async function connectRedis() {
+//   if (!redisConnected) {
+//     client.on("connect", () => console.log("✅ Redis connected"));
+//     client.on("error", (err) => console.error("❌ Redis Error", err));
+//     await client.connect();
+//     redisConnected = true;
+//   }
+// }
 
 export default async function handler(req, res) {
   if (req.method !== "GET") {
@@ -27,11 +27,11 @@ export default async function handler(req, res) {
   }
 
   try {
-    await connectRedis();
-    const cachedBlogs = await client.get("blogs");
-    if (cachedBlogs) {
-      return res.status(200).json({ blogs: JSON.parse(cachedBlogs), cache: true });
-    }
+    // await connectRedis();
+    // const cachedBlogs = await client.get("blogs");
+    // if (cachedBlogs) {
+    //   return res.status(200).json({ blogs: JSON.parse(cachedBlogs), cache: true });
+    // }
     await connectToDatabase();
     const blogs = await Blog.find().sort({ createdAt: -1 });
 
@@ -39,7 +39,7 @@ export default async function handler(req, res) {
       ...blog._doc,
       tags: blog.relatedTo,
     }));
-    await client.setEx("blogs", 3600, JSON.stringify(formattedBlogs));
+    // await client.setEx("blogs", 3600, JSON.stringify(formattedBlogs));
 
     return res.status(200).json({ blogs: formattedBlogs, cache: false });
   } catch (error) {
