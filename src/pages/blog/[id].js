@@ -169,7 +169,7 @@ export default function BlogPage() {
                     {blog.relatedTo.map((tag, i) => (
                       <span
                         key={i}
-                        onClick={() => route.push(`/tag/${encodeURIComponent(tag)}`)}
+                        // onClick={() => route.push(`/tag/${encodeURIComponent(tag)}`)}
                         className="px-3 py-1 bg-gradient-to-r from-teal-100 to-cyan-100 text-teal-700 rounded-full text-sm font-medium shadow-sm hover:from-teal-200 hover:to-cyan-200 cursor-pointer transition"
                       >
                         #{tag}
