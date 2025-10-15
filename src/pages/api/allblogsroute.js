@@ -1,5 +1,6 @@
 import connectToDatabase from '@/config/db';
 import Blog from '@/models/blogmodel';
+import User from '@/models/usermodel';
 // import { createClient } from "redis";
 
 // const client = createClient({
@@ -25,22 +26,26 @@ export default async function handler(req, res) {
   if (req.method !== "GET") {
     return res.status(405).json({ message: "Method not allowed" });
   }
-
   try {
-    // await connectRedis();
-    // const cachedBlogs = await client.get("blogs");
-    // if (cachedBlogs) {
-    //   return res.status(200).json({ blogs: JSON.parse(cachedBlogs), cache: true });
-    // }
     await connectToDatabase();
-    const blogs = await Blog.find().sort({ createdAt: -1 });
-
-    const formattedBlogs = blogs.map((blog) => ({
-      ...blog._doc,
-      tags: blog.relatedTo,
-    }));
-    // await client.setEx("blogs", 3600, JSON.stringify(formattedBlogs));
-
+    let blogs = await Blog.find().sort({ createdAt: -1 });
+    const formattedBlogs = await Promise.all(
+      blogs.map(async (blog) => {
+        let authorObj = null;
+        if (blog.author) {
+          const author = await User.findById(blog.author);
+          if (author) {
+            authorObj = author.toObject();
+          }
+        }
+        return {
+          ...blog.toObject(),
+          author: authorObj,
+          tags: blog.relatedTo,
+        };
+      })
+    );
+    console.log(formattedBlogs);
     return res.status(200).json({ blogs: formattedBlogs, cache: false });
   } catch (error) {
     console.error("Error fetching blogs:", error);

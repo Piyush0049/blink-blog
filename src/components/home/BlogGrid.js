@@ -32,8 +32,22 @@ export default function BlogGrid({ blogs, router, tag, userInterests = [] }) {
             </div>
             <div className="p-4 sm:p-5">
               <h3 className="text-base sm:text-lg font-semibold text-gray-800 line-clamp-2 group-hover:text-teal-600 transition-colors duration-300">
-                {blog.title}
+                {blog.title.substring(0, 30)}...
               </h3>
+              {blog.author && (
+                <div className="flex items-center mt-2">
+                  {blog.author.image && (
+                    <img
+                      src={blog.author.image}
+                      alt={blog.author.name}
+                      className="w-8 h-8 rounded-full mr-2 object-cover"
+                    />
+                  )}
+                  <p className="text-gray-600 text-sm font-medium ml-2">
+                    {blog.author.name}
+                  </p>
+                </div>
+              )}
               {tag && (
                 <p className="text-gray-500 text-xs sm:text-sm mt-2 flex items-center gap-1">
                   {tag} Blog
