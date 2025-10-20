@@ -14,7 +14,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
 
     const prompt = `
 Suggest 3–5 interests based on this blog:
