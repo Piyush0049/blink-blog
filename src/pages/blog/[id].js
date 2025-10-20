@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import CommentSection from "@/components/commentsection";
 import Header from "@/components/header";
 import { ChevronDown, ChevronUp, Tag } from "lucide-react";
+import Image from "next/image";
 
 export default function BlogPage() {
   const route = useRouter();
@@ -90,9 +91,11 @@ export default function BlogPage() {
                 className="flex items-center gap-4 mb-6 sm:mb-10 cursor-pointer hover:bg-gray-50 p-2 rounded-xl transition"
               >
                 {user?.image ? (
-                  <img
+                  <Image
                     src={user.image}
                     alt={user.name}
+                    width={48}
+                    height={48}
                     className="w-12 h-12 rounded-full object-cover border-2 border-teal-400 shadow-md"
                   />
                 ) : (
@@ -114,13 +117,17 @@ export default function BlogPage() {
 
               {/* Media */}
               {blog.media?.type === "image" ? (
-                <img
-                  src={blog.media.url}
-                  alt={blog.title}
-                  className="w-full rounded-2xl shadow-md mb-8 object-cover max-h-[420px] transition hover:scale-[1.01]"
-                  loading="lazy"
-                  draggable={false}
-                />
+                <div className="relative w-full max-h-[420px] h-[420px] mb-8 rounded-2xl overflow-hidden shadow-md">
+                  <Image
+                    src={blog.media.url}
+                    alt={blog.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 768px"
+                    className="object-cover transition hover:scale-[1.01]"
+                    loading="lazy"
+                    draggable={false}
+                  />
+                </div>
               ) : blog.media?.type === "video" ? (
                 <video
                   controls

@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { PenTool } from "lucide-react";
 import Header from "@/components/header";
+import Image from "next/image";
 
 export default function MyBlogs() {
     const router = useRouter();
@@ -48,7 +49,7 @@ export default function MyBlogs() {
                     ) : blogs.length === 0 ? (
                         <div className="text-center py-20">
                             <p className="text-gray-600 text-lg mb-4">
-                                You haven’t published any blogs yet.
+                                You haven't published any blogs yet.
                             </p>
                             <button
                                 onClick={() => router.push("/writeblog")}
@@ -68,18 +69,20 @@ export default function MyBlogs() {
                                 >
                                     {/* Blog Image */}
                                     <div
-                                        className="overflow-hidden relative cursor-pointer"
+                                        className="overflow-hidden relative cursor-pointer h-[200px]"
                                         onClick={() => router.push(`/blog/${blog._id}`)}
                                     >
-                                        <img
+                                        <Image
                                             src={
                                                 blog.media?.url ||
                                                 "https://via.placeholder.com/400x200?text=No+Image"
                                             }
                                             alt={blog.title}
-                                            className="h-[200px] w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                            fill
+                                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                            className="object-cover transition-transform duration-700 group-hover:scale-110"
                                         />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
                                     </div>
 
                                     {/* Blog Content */}

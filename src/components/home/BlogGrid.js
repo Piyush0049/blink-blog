@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function BlogGrid({ blogs, router, tag, userInterests = [] }) {
   return (
@@ -17,15 +18,17 @@ export default function BlogGrid({ blogs, router, tag, userInterests = [] }) {
             onClick={() => router.push(`/blog/${blog._id}`)}
             className="bg-white/80 backdrop-blur-lg rounded-2xl overflow-hidden shadow-md hover:shadow-2xl cursor-pointer transition-all duration-500 group relative"
           >
-            <div className="overflow-hidden relative">
-              <img
+            <div className="overflow-hidden relative h-[180px] sm:h-[200px]">
+              <Image
                 src={blog.media.url}
                 alt={blog.title}
-                className="h-[180px] sm:h-[200px] w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               {isRecommended && (
-                <span className="absolute top-3 right-3 bg-green-700 text-white text-[10px] font-semibold px-2 py-0.5 rounded-full shadow-md">
+                <span className="absolute top-3 right-3 bg-green-700 text-white text-[10px] font-semibold px-2 py-0.5 rounded-full shadow-md z-10">
                   Recommended
                 </span>
               )}
@@ -37,22 +40,26 @@ export default function BlogGrid({ blogs, router, tag, userInterests = [] }) {
               {blog.author && (
                 <div className="flex items-center mt-2">
                   {blog.author.image && (
-                    <img
-                      src={blog.author.image}
-                      alt={blog.author.name}
-                      className="w-8 h-8 rounded-full mr-2 object-cover"
-                    />
+                    <div className="relative w-8 h-8 rounded-full overflow-hidden mr-2">
+                      <Image
+                        src={blog.author.image}
+                        alt={blog.author.name}
+                        fill
+                        sizes="32px"
+                        className="object-cover"
+                      />
+                    </div>
                   )}
                   <p className="text-gray-600 text-sm font-medium ml-2">
                     {blog.author.name}
                   </p>
                 </div>
               )}
-              {tag && (
+              {/* {tag && (
                 <p className="text-gray-500 text-xs sm:text-sm mt-2 flex items-center gap-1">
                   {tag} Blog
                 </p>
-              )}
+              )} */}
               {blog.tags && blog.tags.length > 0 && (
                 <div className="flex flex-wrap gap-2 mt-3">
                   {blog.tags.map((t, i) => (

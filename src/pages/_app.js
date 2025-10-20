@@ -3,6 +3,7 @@ import { Toaster } from "react-hot-toast";
 import { SessionProvider } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 export default function App({ Component, pageProps: { session, ...pageProps } }) {
   const [loading, setLoading] = useState(true); 
@@ -33,6 +34,12 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
 
   return (
     <SessionProvider session={session}>
+      <Head>
+        <title>Blink & Blog</title>
+        <meta name="description" content="Read, share, and create blogs that shape the world" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+
       <Toaster position="top-right" reverseOrder={false} />
 
       {loading && (

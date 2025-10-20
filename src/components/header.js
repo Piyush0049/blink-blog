@@ -4,15 +4,20 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/router";
 import { Menu, X, BookOpen, LogOut, PenTool, User } from "lucide-react";
 import axios from "axios";
+import Image from "next/image";
 
 const DesktopNavbar = ({ router, handleLogout }) => (
   <header className="sticky top-0 z-20 backdrop-blur-xl bg-white/70 border border-white/40 rounded-b-2xl shadow-md px-6 py-3 flex justify-between items-center">
-    <img
-      src="https://res.cloudinary.com/da2imhgtf/image/upload/v1745956931/deawc3nxyaebfwnl1he8.png"
-      alt="logo"
-      onClick={() => router.push("/Home")}
-      className="h-10 md:h-12 hover:cursor-pointer"
-    />
+    <div onClick={() => router.push("/Home")} className="cursor-pointer">
+      <Image
+        src="https://res.cloudinary.com/da2imhgtf/image/upload/v1745956931/deawc3nxyaebfwnl1he8.png"
+        alt="logo"
+        width={48}
+        height={48}
+        priority
+        className="h-10 md:h-12 w-auto"
+      />
+    </div>
     <nav className="flex space-x-8 text-teal-700 font-medium text-sm md:text-base items-center">
       <button
         onClick={() => router.push("/myprofile")}
@@ -79,15 +84,20 @@ const MobileSidebar = ({ router, handleLogout }) => {
             >
               <X size={26} />
             </button>
-            <div className="flex items-center justify-center mt-10 mb-10">
-              <img
+            <div
+              className="flex items-center justify-center mt-10 mb-10 cursor-pointer"
+              onClick={() => {
+                router.push("/Home");
+                setIsOpen(false);
+              }}
+            >
+              <Image
                 src="https://res.cloudinary.com/da2imhgtf/image/upload/v1745956931/deawc3nxyaebfwnl1he8.png"
                 alt="logo"
-                onClick={() => {
-                  router.push("/Home");
-                  setIsOpen(false);
-                }}
-                className="h-[75px] cursor-pointer hover:scale-105 transition-transform"
+                width={75}
+                height={75}
+                priority
+                className="hover:scale-105 transition-transform"
               />
             </div>
             <nav className="flex flex-col space-y-2">

@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { User } from "lucide-react";
 import Header from "@/components/header";
 import toast from "react-hot-toast";
+import Image from "next/image";
 
 export default function UserProfile() {
     const route = useRouter();
@@ -62,9 +63,11 @@ export default function UserProfile() {
                             {/* Profile Header */}
                             <div className="flex flex-col items-center mb-10">
                                 {user.image ? (
-                                    <img
+                                    <Image
                                         src={user.image}
                                         alt={user.name}
+                                        width={112}
+                                        height={112}
                                         className="w-28 h-28 rounded-full object-cover border-4 border-white shadow-lg"
                                     />
                                 ) : (
@@ -88,7 +91,7 @@ export default function UserProfile() {
                                     </p>
                                 ) : (
                                     <p className="text-gray-400 italic bg-gray-50 p-5 rounded-lg shadow-sm">
-                                        This user hasn’t written a bio yet.
+                                        This user hasn't written a bio yet.
                                     </p>
                                 )}
 

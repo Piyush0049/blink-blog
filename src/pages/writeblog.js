@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Toaster, toast } from "react-hot-toast";
 import Header from "@/components/header";
 import interests from "@/utils/interests";
+import Image from "next/image";
 import {
   Wand2, Save, Image as ImageIcon, Video, Type, Settings,
   Loader2, UploadCloud
@@ -13,7 +14,7 @@ import {
 function stripMarkdownToParagraphs(md) {
   if (!md) return '';
   let t = md;
-  t = t.replace(/```[\s\S]*?```/g, '');
+  t = t.replace(/``````/g, '');
   t = t.replace(/^#{1,6}\s+/gm, '')
     .replace(/^>\s?/gm, '')
     .replace(/^(-{3,}|_{3,}|\*{3,})$/gm, '');
@@ -117,7 +118,6 @@ export default function WriteBlog() {
       setSaving(false);
     }
   };
-
 
   const handlePickFile = () => fileInputRef.current?.click();
 
@@ -335,7 +335,15 @@ export default function WriteBlog() {
             {mediaUrl ? (
               <div className="mt-4 overflow-hidden rounded-xl border border-gray-100 shadow-sm">
                 {mediaType === "image" ? (
-                  <img src={mediaUrl} alt="cover" className="w-full max-h-64 object-cover hover:scale-[1.02] transition-transform duration-500" />
+                  <div className="relative w-full max-h-64 h-64">
+                    <Image 
+                      src={mediaUrl} 
+                      alt="cover" 
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover hover:scale-[1.02] transition-transform duration-500" 
+                    />
+                  </div>
                 ) : (
                   <video controls className="w-full max-h-64 object-cover">
                     <source src={mediaUrl} type="video/mp4" />
@@ -370,7 +378,15 @@ export default function WriteBlog() {
             <div className="overflow-hidden">
               {mediaUrl ? (
                 mediaType === "image" ? (
-                  <img src={mediaUrl} alt="preview" className="h-56 w-full object-cover hover:scale-105 transition-transform duration-500" />
+                  <div className="relative h-56 w-full">
+                    <Image 
+                      src={mediaUrl} 
+                      alt="preview" 
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover hover:scale-105 transition-transform duration-500" 
+                    />
+                  </div>
                 ) : (
                   <video className="h-56 w-full object-cover" controls>
                     <source src={mediaUrl} type="video/mp4" />

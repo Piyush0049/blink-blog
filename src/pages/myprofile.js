@@ -6,6 +6,7 @@ import { Save, User, Upload } from "lucide-react";
 import Header from "@/components/header";
 import toast from "react-hot-toast";
 import interestsList from "@/utils/interests";
+import Image from "next/image";
 
 export default function MyProfile() {
   const [user, setUser] = useState({
@@ -119,9 +120,11 @@ export default function MyProfile() {
               <div className="flex flex-col items-center mb-8">
                 <div className="relative group">
                   {user.image ? (
-                    <img
+                    <Image
                       src={user.image}
                       alt="Avatar"
+                      width={112}
+                      height={112}
                       className="w-28 h-28 rounded-full object-cover border-4 border-white shadow-md"
                     />
                   ) : (

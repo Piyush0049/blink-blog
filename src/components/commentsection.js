@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import SendIcon from "@mui/icons-material/Send";
 import axios from "axios";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 const CommentSection = () => {
   const router = useRouter();
@@ -74,9 +75,11 @@ const CommentSection = () => {
   const renderAvatar = (authorDetails) => {
     if (authorDetails?.image) {
       return (
-        <img
+        <Image
           src={authorDetails.image}
           alt={authorDetails.name}
+          width={48}
+          height={48}
           className="w-12 h-12 rounded-full object-cover border border-gray-300 shadow-sm hover:scale-105 transition cursor-pointer"
           onClick={() => router.push(`/user/${authorDetails._id}`)}
         />

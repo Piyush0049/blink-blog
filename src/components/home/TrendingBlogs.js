@@ -1,6 +1,7 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 export default function TrendingBlogs({ blogs, currentPage, setCurrentPage, router }) {
   return (
@@ -46,13 +47,15 @@ export default function TrendingBlogs({ blogs, currentPage, setCurrentPage, rout
                   onClick={() => router.push(`/blog/${blog._id}`)}
                   className="bg-white/80 backdrop-blur-lg rounded-2xl shadow-md hover:shadow-2xl cursor-pointer overflow-hidden transition-all duration-500 group relative"
                 >
-                  <div className="overflow-hidden relative">
-                    <img
+                  <div className="overflow-hidden relative h-[180px] sm:h-[200px]">
+                    <Image
                       src={blog.media.url}
                       alt={blog.title}
-                      className="h-[180px] sm:h-[200px] w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
                   </div>
                   <h3 className="p-4 sm:p-5 text-gray-800 font-semibold text-sm sm:text-base line-clamp-2 group-hover:text-orange-500 transition-colors duration-300">
                     {blog.title}

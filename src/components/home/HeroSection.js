@@ -1,17 +1,21 @@
 "use client";
 import { motion } from "framer-motion";
 import { PenTool, Users, Shield, Sparkles } from "lucide-react";
+import Image from "next/image";
 
 export default function HeroSection({ router }) {
   return (
     <main className="flex flex-col lg:flex-row gap-8 mb-16 mt-6 items-center">
-      <div className="flex-1 relative rounded-2xl overflow-hidden group shadow-xl">
-        <img
+      <div className="w-full lg:flex-1 relative rounded-2xl overflow-hidden group shadow-xl h-[250px] sm:h-[420px]">
+        <Image
           src="https://res.cloudinary.com/da2imhgtf/image/upload/v1717421094/hbee6ankimbppxkoojl4.jpg"
           alt="Hero"
-          className="w-full h-[250px] sm:h-[420px] object-cover transform group-hover:scale-110 transition duration-700"
+          fill
+          priority
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          className="object-cover transform group-hover:scale-110 transition duration-700"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-4 sm:p-8">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-4 sm:p-8 z-10">
           <motion.h1
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -34,12 +38,16 @@ export default function HeroSection({ router }) {
             community where your voice matters.
           </motion.p>
 
-          <button onClick={() => router.push("/writeblog")} className="bg-black/10 backdrop-blur-sm hover:bg-black/30 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-medium text-sm sm:text-lg shadow-lg transition-transform hover:scale-105 flex items-center gap-2 border border-white/30" >
-            <PenTool size={16} /> Start Writing </button>
+          <button
+            onClick={() => router.push("/writeblog")}
+            className="bg-black/10 backdrop-blur-sm hover:bg-black/30 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-medium text-sm sm:text-lg shadow-lg transition-transform hover:scale-105 flex items-center gap-2 border border-white/30 w-fit"
+          >
+            <PenTool size={16} /> Start Writing
+          </button>
         </div>
       </div>
 
-      <aside className="flex-1 bg-white/80 backdrop-blur-xl rounded-2xl p-5 sm:p-8 shadow-lg border border-white/50 hover:shadow-2xl transition transform hover:-translate-y-1">
+      <aside className="w-full lg:flex-1 bg-white/80 backdrop-blur-xl rounded-2xl p-5 sm:p-8 shadow-lg border border-white/50 hover:shadow-2xl transition transform hover:-translate-y-1">
         <h2 className="text-xl sm:text-3xl font-semibold mb-3 sm:mb-4 bg-gradient-to-r from-teal-600 to-sky-600 bg-clip-text text-transparent">
           About Us
         </h2>
