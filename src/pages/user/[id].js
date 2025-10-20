@@ -15,15 +15,6 @@ export default function UserProfile() {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const { id } = route.query;
-        if (id) setId(id);
-    }, [route.query]);
-
-    useEffect(() => {
-        if (id) fetchProfile();
-    }, [id]);
-
     const fetchProfile = async () => {
         try {
             const res = await axios.get(`/api/user/${id}`);
@@ -38,6 +29,15 @@ export default function UserProfile() {
             setLoading(false);
         }
     };
+
+    useEffect(() => {
+        const { id } = route.query;
+        if (id) setId(id);
+    }, [route.query]);
+
+    useEffect(() => {
+        if (id) fetchProfile();
+    }, [id], fetchProfile);
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-teal-50 to-white font-sans text-gray-800 relative">
@@ -91,7 +91,7 @@ export default function UserProfile() {
                                     </p>
                                 ) : (
                                     <p className="text-gray-400 italic bg-gray-50 p-5 rounded-lg shadow-sm">
-                                        This user hasn't written a bio yet.
+                                        This user hasn&apos;t written a bio yet.
                                     </p>
                                 )}
 

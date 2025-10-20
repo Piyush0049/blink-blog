@@ -49,7 +49,7 @@ export default function MyBlogs() {
                     ) : blogs.length === 0 ? (
                         <div className="text-center py-20">
                             <p className="text-gray-600 text-lg mb-4">
-                                You haven't published any blogs yet.
+                                You haven&apos;t published any blogs yet.
                             </p>
                             <button
                                 onClick={() => router.push("/writeblog")}
