@@ -74,10 +74,10 @@ export default function Home() {
         {interestBlogs.length > 0 && (
           <>
             <SectionHeader
-              icon={<Heart className="text-rose-500" />}
+              icon={<Heart className="text-green-500" />}
               title="Recommended For You"
-              gradient="from-rose-500 to-pink-400"
-              borderGradient="from-rose-300 to-pink-200"
+              gradient="from-green-600 to-green-500"
+              borderGradient="from-green-400 to-green-300"
             />
             {blogs.length === 0 ? (
               <SectionLoader />
