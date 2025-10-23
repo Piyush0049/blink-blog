@@ -47,7 +47,7 @@ export default function HeroSection({ router }) {
         </div>
       </div>
 
-      <aside className="w-full lg:flex-1 bg-white/80 backdrop-blur-xl rounded-2xl p-5 sm:p-8 shadow-lg border border-white/50 hover:shadow-2xl transition transform hover:-translate-y-1">
+      <aside className="w-full lg:flex-1 bg-white/80 backdrop-blur-xl rounded-2xl p-5 sm:p-8 shadow-xs hover:shadow-xs transition transform hover:-translate-y-1">
         <h2 className="text-xl sm:text-3xl font-semibold mb-3 sm:mb-4 bg-gradient-to-r from-teal-600 to-sky-600 bg-clip-text text-transparent">
           About Us
         </h2>
