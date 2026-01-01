@@ -27,7 +27,7 @@
     "jwt-decode": "^3.1.2",
     "lucide-react": "^0.541.0",
     "mongoose": "^8.4.1",
-    "next": "14.2.3",
+    "next": "14.2.35",
     "next-auth": "^4.24.11",
     "next-cloudinary": "^6.6.2",
     "postcss": "^8.5.6",
