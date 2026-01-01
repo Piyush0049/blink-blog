@@ -1,7 +1,5 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { getHuggingFaceModel } from "../../../utils/huggingface";
 import interests from "../../../utils/interests";
-
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -14,23 +12,29 @@ export default async function handler(req, res) {
   }
 
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
+    const model = getHuggingFaceModel();
 
-    const prompt = `
-Suggest 3–5 interests based on this blog:
+    const prompt = `You are a helpful assistant that categorizes blog posts. Based on this blog, suggest 3–5 interests.
+
 Title: "${title}"
 Content snippet: "${content.slice(0, 150)}"
 
-Use only from this list: [${interests.join(", ")}]
-Return JSON array only, e.g. ["Technology", "AI"].
-`;
+Use ONLY from this list: [${interests.join(", ")}]
+
+Respond with a JSON array only, nothing else. Example: ["Technology", "AI"]`;
 
     const result = await model.generateContent(prompt);
-    const text = await result.response.text();
+    const text = result.response.text();
 
     let parsed = [];
     try {
-      parsed = JSON.parse(text);
+      // Try to extract JSON array from the response
+      const jsonMatch = text.match(/\[[\s\S]*?\]/);
+      if (jsonMatch) {
+        parsed = JSON.parse(jsonMatch[0]);
+      } else {
+        parsed = JSON.parse(text.trim());
+      }
     } catch {
       parsed = text
         .split(/,|\n|-/)
@@ -46,3 +50,4 @@ Return JSON array only, e.g. ["Technology", "AI"].
     return res.status(500).json({ error: "AI failed to generate interests" });
   }
 }
+

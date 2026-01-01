@@ -22,7 +22,7 @@ export default function MyBlogs() {
             const res = await axios.get("/api/myblogsroute");
             if (res.status === 200) {
                 setBlogs(res.data);
-                console.log(res.data);
+                // console.log(res.data);
             }
         } catch (error) {
             console.error("Error fetching my blogs:", error);
