@@ -37,7 +37,8 @@ export default function UserProfile() {
 
     useEffect(() => {
         if (id) fetchProfile();
-    }, [id], fetchProfile);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [id]);
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-teal-50 to-white font-sans text-gray-800 relative">
